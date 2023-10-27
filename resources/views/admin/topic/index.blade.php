@@ -65,7 +65,7 @@
                     <table class="table-auto my-4">
                         <thead class="">
                             <tr>
-                                <th class="columns-6xl">Topic Title</th>
+                                <th class="columns-6xl">Title</th>
                                 <th class="columns-3xl">Action</th>
                             </tr>
                         </thead>
