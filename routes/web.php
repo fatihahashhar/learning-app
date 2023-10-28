@@ -27,6 +27,6 @@ Route::any('/courses/{course}/topics/create', [TopicController::class, 'create']
 
 Route::any('/courses/{course}/topics/store', [TopicController::class, 'store'])->name('topics.store');
 
-Route::get('update-topic', [TopicController::class, 'updateTopic'])->name('topics.update');
+Route::any('/courses/{course}/{topic}/topics/read', [TopicController::class, 'read'])->name('topics.read');
 
-Route::get('read-topic', [TopicController::class, 'readTopic'])->name('topics.read');
+Route::get('update-topic', [TopicController::class, 'updateTopic'])->name('topics.update');

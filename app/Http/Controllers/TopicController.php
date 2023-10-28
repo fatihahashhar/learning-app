@@ -46,9 +46,9 @@ class TopicController extends Controller
     /**
      * Display the specified resource.
      */
-    public function read()
+    public function read(Course $course, Topic $topic)
     {
-        return view('admin/topic/read_topic');
+        return view('admin/topic/read_topic', compact('course', 'topic'));
     }
 
     /**
