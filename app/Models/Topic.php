@@ -9,7 +9,5 @@ class Topic extends Model
 {
     use HasFactory;
 
-    protected $table = 'topic';
-
-    protected $fillable = ['title', 'contents'];
+    protected $fillable = ['title', 'contents', 'course_id'];
 }

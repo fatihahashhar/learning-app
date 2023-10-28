@@ -23,7 +23,9 @@ Route::get('courses', [CourseController::class, 'index'])->name('courses.index')
 
 Route::get('{course}/topics', [TopicController::class, 'index'])->name('topics.index');
 
-Route::get('{course}/create-topic', [TopicController::class, 'createTopic'])->name('topics.create');
+Route::any('/courses/{course}/topics/create', [TopicController::class, 'create'])->name('topics.create');
+
+Route::any('/courses/{course}/topics/store', [TopicController::class, 'store'])->name('topics.store');
 
 Route::get('update-topic', [TopicController::class, 'updateTopic'])->name('topics.update');
 

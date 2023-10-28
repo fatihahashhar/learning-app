@@ -10,11 +10,11 @@
             <br>
             <div class="card-body">
 
-                <form id="createTopic">
+                <form method="post" action="{{ route('topics.store', $course->id) }}">
                     @csrf
 
                     <div data-te-input-wrapper-init>
-                        <input required type="text" name="topic"
+                        <input required type="text" name="title"
                             class="peer block min-h-[auto] mb-4 w-full rounded border bg-light px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-800 dark:placeholder:text-zinc-350 dark:peer-focus:text-primary [&:not([data-te-input-placeholder-active])]:placeholder:opacity-100"
                             id="inputTopicTitle" placeholder="Topic Title" aria-label="Enter Topic Title" />
 

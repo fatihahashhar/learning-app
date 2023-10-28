@@ -22,7 +22,7 @@ class TopicController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function createTopic(Course $course)
+    public function create(Course $course)
     {
         return view('admin/topic/create_topic', compact('course'));
     }
@@ -30,15 +30,23 @@ class TopicController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {
-        //
+
+    public function store(Request $request, Course $course)
+    {        
+        Topic::create([
+            'title' => $request->title,
+            'contents' => $request->contents,
+            'course_id' => $course->id
+        ]);
+
+        // redirect
+        return redirect()->route('topics.index', $course->id)->with('success', 'Topic created successfully!');
     }
 
     /**
      * Display the specified resource.
      */
-    public function readTopic()
+    public function read()
     {
         return view('admin/topic/read_topic');
     }

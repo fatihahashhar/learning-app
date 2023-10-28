@@ -17,9 +17,9 @@ return new class extends Migration
             $table->unsignedBigInteger('topic_id');
             $table->boolean('is_completed');
             $table->foreign('user_id')
-                ->references('id')->on('user')->onDelete('cascade');
+                ->references('id')->on('users')->onDelete('cascade');
             $table->foreign('topic_id')
-                ->references('id')->on('topic')->onDelete('cascade');
+                ->references('id')->on('topics')->onDelete('cascade');
             $table->timestamps();
         });
     }
