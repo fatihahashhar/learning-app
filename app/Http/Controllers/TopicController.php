@@ -11,7 +11,11 @@ class TopicController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Course $course)
+    public $id;
+    public $title;
+    public $contents;
+
+    public function index(Course $course, Topic $topic)
     {
         $topics = Topic::orderBy('created_at', 'asc')
             ->where('course_id', $course->id)->get();
@@ -22,7 +26,7 @@ class TopicController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create(Course $course)
+    public function createPage(Course $course)
     {
         return view('admin/topic/create_topic', compact('course'));
     }
@@ -54,17 +58,33 @@ class TopicController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function updateTopic()
+    public function updatePage(Course $course, Topic $topic)
     {
-        return view('admin/topic/update_topic');
+        //dd($topic->contents);
+        $topic = Topic::findOrFail($topic->id);
+        return view('admin.topic.update_topic', ['topic' => $topic, 'course' => $course]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Course $course, Topic $topic)
     {
-        //
+        //dd('updating page');
+        $topic = Topic::find($topic->id);
+
+        $topic->title = $request->title;
+        $topic->contents = $request->contents;
+
+        if ($topic->isDirty()) {
+            if ($topic->save()) {
+                return redirect()->route('topics.read', ['course' => $course->id, 'topic' => $topic->id])->with('success', 'Topic updated successfully!');
+            } else {
+                return redirect()->route('topics.read', ['course' => $course->id, 'topic' => $topic->id])->with('error', 'Topic cannot be updated!');
+            }
+        } else {
+            return redirect()->route('topics.read', ['course' => $course->id, 'topic' => $topic->id])->with('info', 'No changes were made');
+        }   
     }
 
     /**

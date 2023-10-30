@@ -14,8 +14,8 @@
 
                 <!-- Button to open Create Course Modal -->
                 <button onclick="create_course_modal.showModal()"
-                    class="inline-block rounded border-2 border-primary px-6 pb-[6px] pt-2 text-xs font-medium uppercase leading-normal text-primary transition duration-150 ease-in-out hover:border-primary-600 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-primary-600 focus:border-primary-600 focus:text-primary-600 focus:outline-none focus:ring-0 active:border-primary-700 active:text-primary-700 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10">Create
-                    Course
+                    class="inline-block rounded border-2 border-primary px-6 pb-[6px] pt-2 text-xs font-medium uppercase leading-normal text-primary transition duration-150 ease-in-out hover:border-primary-600 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-primary-600 focus:border-primary-600 focus:text-primary-600 focus:outline-none focus:ring-0 active:border-primary-700 active:text-primary-700 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10">
+                    <i class="fa-solid fa-plus"></i><span style="margin-left: 5px;">Create Course</span>
                 </button>
 
                 @livewire('course-create')
@@ -38,19 +38,20 @@
                     <div class="col-span-12 md:col-span-5">
                         <button
                             class="inline-block rounded border-2 border-primary px-6 pb-[6px] pt-2 text-xs font-medium uppercase leading-normal text-primary transition duration-150 ease-in-out hover:border-primary-600 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-primary-600 focus:border-primary-600 focus:text-primary-600 focus:outline-none focus:ring-0 active:border-primary-700 active:text-primary-700 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10"
-                            href="#">Search
+                            href="#"><i class="fa-solid fa-magnifying-glass"></i></i><span
+                                style="margin-left: 5px;">Search</span>
                         </button>
                     </div>
                 </div>
 
                 <!-- Table -->
                 <div>
-                    <table class="table-auto my-4">
+                    <table class="table-auto my-5">
                         <thead class="">
                             <tr>
-                                <th class="columns-3xl">Course Title</th>
+                                <th class="columns-4xl">Course Title</th>
                                 <th class="columns-6xl">Course Description</th>
-                                <th class="columns-3xl">Action</th>
+                                <th class="columns-2xl">Action</th>
                             </tr>
                         </thead>
                         <tbody>

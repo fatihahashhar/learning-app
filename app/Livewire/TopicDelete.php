@@ -2,23 +2,23 @@
 
 namespace App\Livewire;
 
+use App\Models\Topic;
 use Livewire\Component;
 
 class TopicDelete extends Component
 {
+    public $id;
     public $title;
-    public $description;
-    public $showModal = false;
+    public $contents;
+
+    public $topic;
 
     public function render()
     {
-        return view('admin/livewire.topic-delete');
-    }
+        $this->title = $this->topic->title;
+        $this->contents = $this->topic->contents;
 
-    public function hideModal()
-    {
-        // This method is called when the "Cancel" button is clicked
-        $this->emit('hideModal');
+        return view('admin/livewire.topic-delete');
     }
 
     public function deleteTopic()
@@ -29,17 +29,15 @@ class TopicDelete extends Component
             'description' => 'required',
         ]);
         
-        // Add code to delete the topic here
+        $topic = Topic::find($this->topic->id);
 
-        // Topic::delete([
-        //     'title' => $this->title,
-        //     'description' => $this->description,
-        // ]);
+        if (!$topic) {
+            return 'Topic not found';
+        }
 
-        // Close the modal
-        $this->dispatchBrowserEvent('closeModal');
-
+        $topic->delete();
+        
         // success message
-        session()->flash('success', 'Topic deleted successfully');
+        return redirect()->route('topics.index')->with('success', 'Topic deleted successfully!');
     }
 }

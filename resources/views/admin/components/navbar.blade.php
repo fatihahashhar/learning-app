@@ -5,7 +5,7 @@
                     <div class="flex items-center">
                         <div class="hidden md:block">
                             <div class="ml-3 flex items-baseline space-x-4">
-                                <a href="#"
+                                <a href={{ route('courses.index') }}
                                     class="bg-gray-900 text-white rounded-md px-3 py-2 text-md font-medium"
                                     aria-current="page">Home</a>
                             </div>

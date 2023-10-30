@@ -23,10 +23,12 @@ Route::get('courses', [CourseController::class, 'index'])->name('courses.index')
 
 Route::get('{course}/topics', [TopicController::class, 'index'])->name('topics.index');
 
-Route::any('/courses/{course}/topics/create', [TopicController::class, 'create'])->name('topics.create');
+Route::any('/courses/{course}/topics/createPage', [TopicController::class, 'createPage'])->name('topics.createPage');
 
 Route::any('/courses/{course}/topics/store', [TopicController::class, 'store'])->name('topics.store');
 
 Route::any('/courses/{course}/{topic}/topics/read', [TopicController::class, 'read'])->name('topics.read');
 
-Route::get('update-topic', [TopicController::class, 'updateTopic'])->name('topics.update');
+Route::any('/courses/{course}/{topic}/topics/updatePage', [TopicController::class, 'updatePage'])->name('topics.updatePage');
+
+Route::any('/courses/{course}/{topic}/topics/update', [TopicController::class, 'update'])->name('topics.update');

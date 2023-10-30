@@ -5,6 +5,14 @@
         <div id="success-notification" class="bg-green-500 text-center text-white text-sm p-3 rounded-lg mb-4">
             <p>{{ $message }}</p>
         </div>
+    @elseif ($message = Session::get('error'))
+        <div id="error-notification" class="bg-red-500 text-center text-white text-sm p-3 rounded-lg mb-4">
+            <p>{{ $message }}</p>
+        </div>
+    @elseif ($message = Session::get('info'))
+        <div id="info-notification" class="bg-blue-500 text-center text-white text-sm p-3 rounded-lg mb-4">
+            <p>{{ $message }}</p>
+        </div>
     @endif
 
     <main>
@@ -32,17 +40,15 @@
                         <!-- Button to open Update Course Modal -->
                         <button type="button" onclick="update_course_modal.showModal()"
                             class="button_secondary inline-block rounded border-2 border-primary px-3 pb-[6px] pt-2 text-xs me-2 font-medium uppercase leading-normal text-primary transition duration-150 ease-in-out hover:border-primary-600 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-primary-600 focus:border-primary-600 focus:text-primary-600 focus:outline-none focus:ring-0 active:border-primary-700 active:text-primary-700 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10">
-                            Update Course
+                            <i class="fas fa-edit"></i><span style="margin-left: 5px;">Update</span>
                         </button>
 
                         <!-- Button to open Delete Course Modal -->
                         <button type="button" onclick="delete_course_modal.showModal()"
-                            class="button_secondary inline-block rounded border-2 border-primary px-3 pb-[6px] pt-2 text-xs font-medium uppercase leading-normal text-primary transition duration-150 ease-in-out hover:border-primary-600 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-primary-600 focus:border-primary-600 focus:text-primary-600 focus:outline-none focus:ring-0 active:border-primary-700 active:text-primary-700 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10">Delete
-                            Course
+                            class="button_secondary inline-block rounded border-2 border-primary px-3 pb-[6px] pt-2 text-xs font-medium uppercase leading-normal text-primary transition duration-150 ease-in-out hover:border-primary-600 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-primary-600 focus:border-primary-600 focus:text-primary-600 focus:outline-none focus:ring-0 active:border-primary-700 active:text-primary-700 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10">
+                            <i class="fas fa-trash"></i><span style="margin-left: 5px;">Delete</span>
                         </button>
                     </div>
-
-                    @livewire('topic-delete')
 
                 </div>
 
@@ -55,8 +61,8 @@
                 <div class="d-flex justify-content-end mb-4">
                     <!-- Button to open Create Topic Modal -->
                     <a class="justify-end button_primary inline-block rounded border-2 border-primary px-6 pb-[6px] pt-2 text-xs font-medium uppercase leading-normal text-primary transition duration-150 ease-in-out hover:border-primary-600 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-primary-600 focus:border-primary-600 focus:text-primary-600 focus:outline-none focus:ring-0 active:border-primary-700 active:text-primary-700 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10"
-                        href={{ route('topics.create', $course->id) }}>Create
-                        Topic
+                        href={{ route('topics.createPage', $course->id) }}>
+                        <i class="fa-solid fa-plus"></i><span style="margin-left: 5px;">Create Topic</span>
                     </a>
                 </div>
 
@@ -65,8 +71,8 @@
                     <table class="table-auto my-4">
                         <thead class="">
                             <tr>
-                                <th class="columns-6xl">Topic Title</th>
-                                <th class="columns-3xl">Action</th>
+                                <th class="columns-7xl">Topic Title</th>
+                                <th class="columns-3xl action-column">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -78,15 +84,6 @@
                                             <a class="button_secondary inline-block rounded border-2 border-primary px-3 pb-[6px] pt-2 me-2 text-xs font-medium uppercase leading-normal text-primary transition duration-150 ease-in-out hover:border-primary-600 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-primary-600 focus:border-primary-600 focus:text-primary-600 focus:outline-none focus:ring-0 active:border-primary-700 active:text-primary-700 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10"
                                                 href="{{ route('topics.read', ['course' => $course->id, 'topic' => $topic->id]) }}">View
                                             </a>
-                                            <a class="button_secondary inline-block rounded border-2 border-primary px-3 pb-[6px] pt-2 text-xs me-2 font-medium uppercase leading-normal text-primary transition duration-150 ease-in-out hover:border-primary-600 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-primary-600 focus:border-primary-600 focus:text-primary-600 focus:outline-none focus:ring-0 active:border-primary-700 active:text-primary-700 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10"
-                                                href={{ route('topics.update') }}>
-                                                Update
-                                            </a>
-
-                                            <!-- Button to open Delete Topic Modal -->
-                                            <button onclick="delete_topic_modal.showModal()"
-                                                class="button_secondary inline-block rounded border-2 border-primary px-3 pb-[6px] pt-2 text-xs font-medium uppercase leading-normal text-primary transition duration-150 ease-in-out hover:border-primary-600 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-primary-600 focus:border-primary-600 focus:text-primary-600 focus:outline-none focus:ring-0 active:border-primary-700 active:text-primary-700 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10">Delete
-                                            </button>
                                         </td>
                                     </tr>
                                 @endforeach
