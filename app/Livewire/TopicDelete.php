@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Models\Course;
 use App\Models\Topic;
 use Livewire\Component;
 
@@ -23,12 +24,6 @@ class TopicDelete extends Component
 
     public function deleteTopic()
     {
-        // validation logic
-        $this->validate([
-            'title' => 'required',
-            'description' => 'required',
-        ]);
-        
         $topic = Topic::find($this->topic->id);
 
         if (!$topic) {
@@ -38,6 +33,6 @@ class TopicDelete extends Component
         $topic->delete();
         
         // success message
-        return redirect()->route('topics.index')->with('success', 'Topic deleted successfully!');
+        return redirect()->route('courses.index')->with('success', 'Topic deleted successfully!');
     }
 }

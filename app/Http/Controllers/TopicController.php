@@ -60,7 +60,6 @@ class TopicController extends Controller
      */
     public function updatePage(Course $course, Topic $topic)
     {
-        //dd($topic->contents);
         $topic = Topic::findOrFail($topic->id);
         return view('admin.topic.update_topic', ['topic' => $topic, 'course' => $course]);
     }
@@ -70,7 +69,6 @@ class TopicController extends Controller
      */
     public function update(Request $request, Course $course, Topic $topic)
     {
-        //dd('updating page');
         $topic = Topic::find($topic->id);
 
         $topic->title = $request->title;

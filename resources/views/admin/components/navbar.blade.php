@@ -7,7 +7,10 @@
                             <div class="ml-3 flex items-baseline space-x-4">
                                 <a href={{ route('courses.index') }}
                                     class="bg-gray-900 text-white rounded-md px-3 py-2 text-md font-medium"
-                                    aria-current="page">Home</a>
+                                    aria-current="page">Courses</a>
+                                <a href={{ route('users.index') }}
+                                    class="bg-gray-900 text-white rounded-md px-3 py-2 text-md font-medium"
+                                    aria-current="page">Users</a>
                             </div>
                         </div>
                     </div>
@@ -23,4 +26,3 @@
             </div>
         </nav>
     </div>
-

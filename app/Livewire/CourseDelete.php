@@ -22,13 +22,7 @@ class CourseDelete extends Component
     }
 
     public function deleteCourse()
-    {
-        // validation logic
-        $this->validate([
-            'title' => 'required',
-            'description' => 'required',
-        ]);
-        
+    {   
         $course = Course::find($this->course->id);
 
         if (!$course) {
