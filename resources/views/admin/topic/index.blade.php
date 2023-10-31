@@ -29,9 +29,10 @@
                     <!-- Column -->
                     <div class="col-span-12 md:col-span-9">
                         <div style="font-weight: bold; font-size: 20px;">
-                            <p class="mb-2">{{ $course->title }}</p>
+                            <h1 class="mb-2 text-3xl font-bold text-gray-900 dark:text-gray-600 md:text-2xl lg:text-2xl">{{ $course->title }}
+                            </h1>
                         </div>
-                        <p class="text-justify">{{ $course->description }}</p>
+                        <p class="text-gray-900 dark:text-gray-700 text-justify">{{ $course->description }}</p>
                     </div>
 
                     <!-- Column -->

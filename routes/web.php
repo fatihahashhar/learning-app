@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\NormalUserController;
 use App\Http\Controllers\TopicController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -50,6 +51,16 @@ Route::any('/users/{user}/deletePage', [UserController::class, 'deletePage'])->n
 
 Route::any('/users/{user}/delete', [UserController::class, 'delete'])->name('users.delete');
 
-Route::any('/users/{user}/manageUserCourses', [UserController::class, 'manageUserCourses'])->name('users.manageUserCourses');
+Route::any('/users/{user}/manageUserCoursePage', [UserController::class, 'manageUserCoursePage'])->name('users.manageUserCoursePage');
+
+Route::any('/users/{user}/assignCourses', [UserController::class, 'assignCourses'])->name('users.assignCourses');
+
+//Normal users routes
+Route::get('/users/dashboard', [NormalUserController::class, 'index'])->name('normalUsers.index');
+
+Route::any('/users/courseDetailPage', [NormalUserController::class, 'courseDetailPage'])->name('normalUsers.courseDetailPage');
+
+Route::any('/users/topicDetailPage', [NormalUserController::class, 'topicDetailPage'])->name('normalUsers.topicDetailPage');
+
 
 

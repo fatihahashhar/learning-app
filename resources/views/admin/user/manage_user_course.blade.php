@@ -36,12 +36,19 @@
                                     <tr>
                                         <td class="text-center">{{ $course->title }}</td>
                                         <td class="text-center">
-                                            <a class="button_secondary inline-block rounded border-2 border-primary px-3 pb-[6px] pt-2 me-2 text-xs font-medium uppercase leading-normal text-primary transition duration-150 ease-in-out hover:border-primary-600 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-primary-600 focus:border-primary-600 focus:text-primary-600 focus:outline-none focus:ring-0 active:border-primary-700 active:text-primary-700 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10"
-                                                href='#'>Remove
-                                            </a>
-                                            <a class="button_secondary inline-block rounded border-2 border-primary px-3 pb-[6px] pt-2 me-2 text-xs font-medium uppercase leading-normal text-primary transition duration-150 ease-in-out hover:border-primary-600 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-primary-600 focus:border-primary-600 focus:text-primary-600 focus:outline-none focus:ring-0 active:border-primary-700 active:text-primary-700 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10"
-                                                href='#'>Assign
-                                            </a>
+                                            <form action="{{ route('users.assignCourses', [$user, $course]) }}" method="POST">
+                                                @csrf
+                                                @method('PUT')
+                                            
+                                                @if ($user->courses->contains($course->id))
+                                                    <input type="hidden" name="remove" value="{{ $course->id }}">
+                                                    <button type="submit" name="remove" value="{{ $course->id }}" class="button_red inline-block rounded border-2 border-primary px-3 pb-[6px] pt-2 me-2 text-xs font-medium uppercase leading-normal text-primary transition duration-150 ease-in-out hover:border-primary-600 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-primary-600 focus:border-primary-600 focus:text-primary-600 focus:outline-none focus:ring-0 active:border-primary-700 active:text-primary-700 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10">Remove</button>
+                                                @else
+                                                    <input type="hidden" name="assign" value="{{ $course->id }}">
+                                                    <button type="submit" name="assign" value="{{ $course->id }}" class="button_green inline-block rounded border-2 border-primary px-3 pb-[6px] pt-2 me-2 text-xs font-medium uppercase leading-normal text-primary transition duration-150 ease-in-out hover:border-primary-600 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-primary-600 focus:border-primary-600 focus:text-primary-600 focus:outline-none focus:ring-0 active:border-primary-700 active:text-primary-700 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10">Assign</button>
+                                                @endif
+                                            </form>
+                                            
                                         </td>
                                     </tr>
                                 @endforeach

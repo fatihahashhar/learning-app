@@ -96,19 +96,22 @@ class UserController extends Controller
         return redirect()->route('users.index')->with('success', 'User has been deleted!');
     }
 
-    public function manageUserCourses(Course $course, User $user)
+    public function manageUserCoursePage(Course $course, User $user)
     {
         $courses = Course::all();
-        return view('admin/user/manage_user_course', compact('courses'));
+        return view('admin/user/manage_user_course', compact('courses', 'user'));
     }
 
-    public function RemoveUserCourses(Course $course, User $user)
+    public function assignCourses(User $user)
     {
-        //
-    }
+        $courseId = request('assign') ?? request('remove');
 
-    public function AssignUserCourses(Course $course, User $user)
-    {
-        //
+        if (request()->has('assign')) {
+            $user->courses()->attach($courseId);
+        } elseif (request()->has('remove')) {
+            $user->courses()->detach($courseId);
+        }
+
+        return redirect()->back()->with('success', 'Course assignment updated.');
     }
 }

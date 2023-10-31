@@ -27,6 +27,22 @@
         border: 2px solid;
     }
 
+    .button_red {
+        background-color: rgb(255, 38, 0);
+        color: white !important;
+        padding-left: 5px;
+        padding-right: 5px;
+        border: 2px solid;
+    }
+
+    .button_green {
+        background-color: rgb(5, 143, 33);
+        color: white !important;
+        padding-left: 5px;
+        padding-right: 5px;
+        border: 2px solid;
+    }
+
     table {
         text-align: center;
         border: 2px solid;
