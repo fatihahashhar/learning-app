@@ -3,68 +3,90 @@
 namespace App\Http\Controllers;
 
 use App\Models\Course;
+use App\Models\Topic;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class NormalUserController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display Index Page
      */
     public function index()
     {
-        return view('user/index');
+        $courses = auth()->user()->courses;
+        $courseCompletionRatios = [];
+
+        foreach ($courses as $course) {
+            $courseCompletionRatios[$course->id] = $this->completionRatio($course);
+        }
+
+        return view('user/index', compact('courses', 'courseCompletionRatios'));
+    }
+
+
+    /**
+     * Display Course Detail Page.
+     */
+    public function courseDetailPage(Course $course)
+    {
+        $topics = Topic::orderBy('created_at', 'asc')
+            ->where('course_id', $course->id)->get();
+
+        $courseCompletionRatios = [];
+
+        $courseCompletionRatios[$course->id] = $this->completionRatio($course);
+
+        return view('user/course_detail_user', compact('course', 'topics', 'courseCompletionRatios'));
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Display Topic Detail Page.
      */
-    public function create()
+    public function topicDetailPage(Topic $topic)
     {
-        //
+        $user = auth()->user();
+        return view('user/topic_detail_user', compact('topic', 'user'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function completedTopic(User $user)
     {
-        //
+        // Get the value (either 'complete' or 'incomplete') from the request
+        $value = request()->has('complete') ? 'complete' : 'incomplete';
+
+        // Get the topic ID from the request
+        $topicId = request('complete') ?? request('incomplete');
+
+        // Validate that the value is either 'complete' or 'incomplete'
+        if ($value === 'complete') {
+            // Update the 'is_completed' column to 1
+            $user->topics()->updateExistingPivot($topicId, ['is_completed' => 1]);
+        } else {
+            // Update the 'is_completed' column to 0
+            $user->topics()->updateExistingPivot($topicId, ['is_completed' => 0]);
+        }
+        return redirect()->back()->with('success', 'Completion status updated.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function courseDetailPage()
+    public function completionRatio(Course $course)
     {
-        return view('user/course_detail_user');
-    }
+        $course_topics = Topic::where('course_id', $course->id)->pluck('id')->toArray();
+        $allTopicsCount = count($course_topics);
 
-    public function topicDetailPage()
-    {
-        return view('user/topic_detail_user');
-    }
+        $completedTopicsCount = User::find(Auth::user()->id)
+            ->topics()
+            ->where('is_completed', 1)
+            ->whereIn('topic_id', $course_topics)
+            ->count();
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
+        // Check if there exists topic in the specified course
+        if ($allTopicsCount != 0) {
+            $completion = ($completedTopicsCount / $allTopicsCount) * 100;
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+            return (round($completion, 2));
+        } else {
+            return 'N/A';
+        }
     }
 }

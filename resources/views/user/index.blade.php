@@ -1,10 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-    @if ($message = Session::get('success'))
+    @if (Session::has('success'))
         <div id="success-notification" class="bg-green-500 text-center text-white text-sm p-3 rounded-lg mb-4">
-            <p>{{ $message }}</p>
+            <p>{{ Session::get('success') }}</p>
         </div>
+        {{ Session::forget('success') }}
     @endif
 
     <main>
@@ -29,15 +30,27 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td class="text-center">Course Title Here</td>
-                                <td class="text-center">Completion Status Here</td>
-                                <td class="text-center">
-                                    <a class="button_secondary inline-block rounded border-2 border-primary px-3 pb-[6px] pt-2 me-2 text-xs font-medium uppercase leading-normal text-primary transition duration-150 ease-in-out hover:border-primary-600 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-primary-600 focus:border-primary-600 focus:text-primary-600 focus:outline-none focus:ring-0 active:border-primary-700 active:text-primary-700 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10"
-                                        href={{ route('normalUsers.courseDetailPage') }}>View
-                                    </a>
-                                </td>
-                            </tr>
+                            @if (count($courses) > 0)
+                                @foreach ($courses as $course)
+                                    <tr>
+                                        <td class="text-center">{{ $course->title }}</td>
+                                        <td class="text-center">
+                                                {{ $courseCompletionRatios[$course->id] }}%
+                                        </td>
+                                        <td class="text-center">
+                                            <a class="button_secondary inline-block rounded border-2 border-primary px-3 pb-[6px] pt-2 me-2 text-xs font-medium uppercase leading-normal text-primary transition duration-150 ease-in-out hover:border-primary-600 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-primary-600 focus:border-primary-600 focus:text-primary-600 focus:outline-none focus:ring-0 active:border-primary-700 active:text-primary-700 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10"
+                                                href={{ route('normalUsers.courseDetailPage', ['course' => $course->id]) }}>View
+                                            </a>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            @else
+                                <tr>
+                                    <td colspan="3" align="center">
+                                        No Course Found!
+                                    </td>
+                                </tr>
+                            @endif
                         </tbody>
                     </table>
                 </div>

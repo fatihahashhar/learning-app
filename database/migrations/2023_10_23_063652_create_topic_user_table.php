@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('topic_id');
-            $table->boolean('is_completed');
+            $table->boolean('is_completed')->default(0);
             $table->foreign('user_id')
                 ->references('id')->on('users')->onDelete('cascade');
             $table->foreign('topic_id')

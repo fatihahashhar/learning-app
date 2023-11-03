@@ -19,20 +19,29 @@
         <div class="card rounded-md mx-auto max-w-7xl py-6 sm:px-6 lg:px-8 my-5" style="background-color: #a4b6c4">
             <div class="card-header">
                 <div class="text-right">
-                    <a class="button_secondary inline-block rounded border-2 border-primary px-3 pb-[6px] pt-2 text-xs me-2 font-medium uppercase leading-normal text-primary transition duration-150 ease-in-out hover:border-primary-600 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-primary-600 focus:border-primary-600 focus:text-primary-600 focus:outline-none focus:ring-0 active:border-primary-700 active:text-primary-700 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10"
-                        href="#">
-                        <i class="fas fa-edit"></i><span style="margin-left: 5px;">Mark as Complete</span>
-                    </a>
-                    <a class="button_secondary inline-block rounded border-2 border-primary px-3 pb-[6px] pt-2 text-xs me-2 font-medium uppercase leading-normal text-primary transition duration-150 ease-in-out hover:border-primary-600 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-primary-600 focus:border-primary-600 focus:text-primary-600 focus:outline-none focus:ring-0 active:border-primary-700 active:text-primary-700 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10"
-                        href="#">
-                        <i class="fas fa-edit"></i><span style="margin-left: 5px;">Mark as Incomplete</span>
-                    </a>
+                    <form action="{{ route('normalUsers.completedTopic', $user->id) }}" method="POST">
+                        @csrf
+                        @method('PUT')
+
+                        @if ($user->topics->contains($topic->id) && $user->topics->find($topic->id)->pivot->is_completed === 1)
+                            <input type="hidden" name="incomplete" value="{{ $topic->id }}">
+                            <button type="submit" name="incomplete" value="{{ $topic->id }}"
+                                class="button_red inline-block rounded border-2 border-primary px-3 pb-[6px] pt-2 me-2 text-xs font-medium uppercase leading-normal text-primary transition duration-150 ease-in-out hover:border-primary-600 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-primary-600 focus:border-primary-600 focus:text-primary-600 focus:outline-none focus:ring-0 active:border-primary-700 active:text-primary-700 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10">Mark
+                                as Incomplete</button>
+                        @else
+                            <input type="hidden" name="complete" value="{{ $topic->id }}">
+                            <button type="submit" name="complete" value="{{ $topic->id }}"
+                                class="button_green inline-block rounded border-2 border-primary px-3 pb-[6px] pt-2 me-2 text-xs font-medium uppercase leading-normal text-primary transition duration-150 ease-in-out hover:border-primary-600 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-primary-600 focus:border-primary-600 focus:text-primary-600 focus:outline-none focus:ring-0 active:border-primary-700 active:text-primary-700 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10">Mark
+                                as Completed</button>
+                        @endif
+                    </form>
+
                 </div>
-                <h3 class="font-bold text-center text-lg mb-4">Topic Title Here</h3>
+                <h3 class="font-bold text-center text-lg mb-4">{{ $topic->title }}</h3>
             </div>
             <br>
             <div class="card-body">
-                <h3 class="text-justify mb-2" style="line-height: 12px; white-space: pre-wrap;">Contents Here</h3>
+                <h3 class="text-justify mb-2" style="line-height: 12px; white-space: pre-wrap;">{{ $topic->contents }}</h3>
             </div>
     </main>
 

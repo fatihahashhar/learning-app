@@ -2,63 +2,60 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Course;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display the login form
      */
-    public function index()
+    public function login()
     {
-        //
+        return view('user/login');
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Authenticate the login details
      */
-    public function create()
+    public function authenticate(Request $request)
     {
-        //
+        $request->validate([
+            'email' => 'required',
+            'password' => 'required',
+        ]);
+
+        $credentials = $request->only('email', 'password');
+
+        //Attempt to authenticate the user
+        if (Auth::attempt($credentials)) {
+            // Check the user's role
+            $user = Auth::user();
+            if ($user->role === 'admin') {
+                // User is an admin, route to 'courses.index'
+                return redirect()->route('courses.index', $user->id)->with('success', 'Login successful');
+            } else {
+                // User is not an admin, route to 'normalUsers.dashboard'
+                return redirect()->route('normalUsers.dashboard', ['user' => $user->id])
+                    ->with('success', 'Login successful');
+            }
+        }
+
+        return redirect()->route('login')->with('error', 'Login details are not valid');
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Handle logout action
      */
-    public function store(Request $request)
+    public function logout(Request $request): RedirectResponse
     {
-        //
-    }
+        Auth::logout();
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        return redirect()->route('login')->with('success', 'Logout successful');
     }
 }

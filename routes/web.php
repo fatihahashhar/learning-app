@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\NormalUserController;
 use App\Http\Controllers\TopicController;
 use App\Http\Controllers\UserController;
@@ -17,50 +18,35 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/dashboard', function () {
-    return view('welcome');
+Route::get('/', [LoginController::class, 'login'])->name('login');
+Route::any('/users/logout', [LoginController::class, 'logout'])->name('logout');
+Route::post('/users/authenticate', [LoginController::class, 'authenticate'])->name('authenticate');
+
+//routes for Admin
+ Route::middleware(['is.admin'])->group(function () {
+    // Routes that require the 'admin' role
+    Route::get('courses', [CourseController::class, 'index'])->name('courses.index');
+    Route::any('topics/{course}', [TopicController::class, 'index'])->name('topics.index');
+    Route::any('/courses/topics/createPage/{course}', [TopicController::class, 'createPage'])->name('topics.createPage');
+    Route::any('/courses/topics/store/{course}', [TopicController::class, 'store'])->name('topics.store');
+    Route::any('/courses/topics/read/{course}/{topic}', [TopicController::class, 'read'])->name('topics.read');
+    Route::any('/courses/topics/updatePage/{course}/{topic}', [TopicController::class, 'updatePage'])->name('topics.updatePage');
+    Route::any('/courses/topics/update/{course}/{topic}', [TopicController::class, 'update'])->name('topics.update');
+    Route::get('users', [UserController::class, 'index'])->name('users.index');
+    Route::any('users/createPage', [UserController::class, 'createPage'])->name('users.createPage');
+    Route::any('/users/store', [UserController::class, 'store'])->name('users.store');
+    Route::any('/users/updatePage/{user}', [UserController::class, 'updatePage'])->name('users.updatePage');
+    Route::any('/users/update/{user}', [UserController::class, 'update'])->name('users.update');
+    Route::any('/users/deletePage/{user}', [UserController::class, 'deletePage'])->name('users.deletePage');
+    Route::any('/users/delete/{user}', [UserController::class, 'delete'])->name('users.delete');
+    Route::any('/users/manageUserCoursePage/{user}', [UserController::class, 'manageUserCoursePage'])->name('users.manageUserCoursePage');
+    Route::any('/users/assignCourses/{user}', [UserController::class, 'assignCourses'])->name('users.assignCourses');
 });
 
-//Course and Topic routes
-Route::get('courses', [CourseController::class, 'index'])->name('courses.index');
-
-Route::any('{course}/topics', [TopicController::class, 'index'])->name('topics.index');
-
-Route::any('/courses/{course}/topics/createPage', [TopicController::class, 'createPage'])->name('topics.createPage');
-
-Route::any('/courses/{course}/topics/store', [TopicController::class, 'store'])->name('topics.store');
-
-Route::any('/courses/{course}/{topic}/topics/read', [TopicController::class, 'read'])->name('topics.read');
-
-Route::any('/courses/{course}/{topic}/topics/updatePage', [TopicController::class, 'updatePage'])->name('topics.updatePage');
-
-Route::any('/courses/{course}/{topic}/topics/update', [TopicController::class, 'update'])->name('topics.update');
-
-// Users routes
-Route::get('users', [UserController::class, 'index'])->name('users.index');
-
-Route::any('users/createPage', [UserController::class, 'createPage'])->name('users.createPage');
-
-Route::any('/users/store', [UserController::class, 'store'])->name('users.store');
-
-Route::any('/users/{user}/updatePage', [UserController::class, 'updatePage'])->name('users.updatePage');
-
-Route::any('/users/{user}/update', [UserController::class, 'update'])->name('users.update');
-
-Route::any('/users/{user}/deletePage', [UserController::class, 'deletePage'])->name('users.deletePage');
-
-Route::any('/users/{user}/delete', [UserController::class, 'delete'])->name('users.delete');
-
-Route::any('/users/{user}/manageUserCoursePage', [UserController::class, 'manageUserCoursePage'])->name('users.manageUserCoursePage');
-
-Route::any('/users/{user}/assignCourses', [UserController::class, 'assignCourses'])->name('users.assignCourses');
-
-//Normal users routes
-Route::get('/users/dashboard', [NormalUserController::class, 'index'])->name('normalUsers.index');
-
-Route::any('/users/courseDetailPage', [NormalUserController::class, 'courseDetailPage'])->name('normalUsers.courseDetailPage');
-
-Route::any('/users/topicDetailPage', [NormalUserController::class, 'topicDetailPage'])->name('normalUsers.topicDetailPage');
-
-
-
+ Route::middleware(['is.normal.user'])->group(function () {
+    // Routes that require the 'user' role
+    Route::get('/users/dashboard', [NormalUserController::class, 'index'])->name('normalUsers.dashboard');
+    Route::get('/users/courseDetailPage/{course}', [NormalUserController::class, 'courseDetailPage'])->name('normalUsers.courseDetailPage');
+    Route::get('/users/topicDetailPage/{topic}', [NormalUserController::class, 'topicDetailPage'])->name('normalUsers.topicDetailPage');
+    Route::any('/users/completedTopic/{user}', [NormalUserController::class, 'completedTopic'])->name('normalUsers.completedTopic');
+});

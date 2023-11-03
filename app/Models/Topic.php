@@ -10,4 +10,9 @@ class Topic extends Model
     use HasFactory;
 
     protected $fillable = ['title', 'contents', 'course_id'];
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'topic_user')->withPivot('is_completed');
+    }
 }

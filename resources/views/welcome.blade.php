@@ -8,7 +8,7 @@
                 Add New Course
             </div>
 
-            <form action="{{ route('courses.store') }}" method="POST">
+            <form action="#" method="POST">
                 @csrf
 
                 <!-- Title -->
@@ -36,7 +36,7 @@
 
                 <div class="flex justify-end mt-4">
                     <button type="submit" class="primary-btn px-4 py-2 mr-2">Add Course</button>
-                    <a class="secondary-btn px-4 py-2" href="{{ route('courses.index') }}">Cancel</a>
+                    <a class="secondary-btn px-4 py-2" href="#">Cancel</a>
                 </div>
 
             </form>

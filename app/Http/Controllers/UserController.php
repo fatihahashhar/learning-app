@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Course;
+use App\Models\Topic;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -108,8 +109,21 @@ class UserController extends Controller
 
         if (request()->has('assign')) {
             $user->courses()->attach($courseId);
+            $course_topics = Topic::where('course_id', $courseId)->get();
+            if ($course_topics != null) {
+                foreach ($course_topics as $course_topic) {
+
+                    $user->topics()->attach($course_topic);
+                }
+            }
         } elseif (request()->has('remove')) {
             $user->courses()->detach($courseId);
+            $course_topics = Topic::where('course_id', $courseId)->get();
+            if ($course_topics != null) {
+                foreach ($course_topics as $course_topic) {
+                    $user->topics()->detach($course_topic);
+                }
+            }
         }
 
         return redirect()->back()->with('success', 'Course assignment updated.');

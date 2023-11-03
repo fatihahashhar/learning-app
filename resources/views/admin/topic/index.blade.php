@@ -21,8 +21,7 @@
 
         @livewire('course-delete', ['course' => $course])
 
-        <br>
-        <div class="card rounded-md mx-auto max-w-7xl py-6 sm:px-6 lg:px-8" style="background-color: #a4b6c4">
+        <div class="card my-6 rounded-md mx-auto max-w-7xl py-6 sm:px-6 lg:px-8" style="background-color: #a4b6c4">
             <div class="card-header">
                 <div class="grid grid-cols-12 gap-4 mb-4">
 
