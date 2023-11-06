@@ -16,9 +16,7 @@
     @endif
 
     <main>
-
-        <br>
-        <div class="card rounded-md mx-auto max-w-7xl py-6 sm:px-6 lg:px-8" style="background-color: #a4b6c4">
+        <div class="card my-6 rounded-md mx-auto max-w-7xl py-6 sm:px-6 lg:px-8" style="background-color: #a4b6c4">
             <div align="left" class="card-header">
                 <h1 class="mb-2 text-3xl font-extrabold text-gray-900 dark:text-gray-600 md:text-4xl lg:text-4xl">
                     {{ $course->title }}
@@ -26,9 +24,33 @@
                 <h1 class="mb-7 text-3xl font-bold text-gray-900 dark:text-gray-600 md:text-2xl lg:text-2xl">
                     {{ $course->description }}</h1>
                 </h1>
-                <h1 class="mb-4 text-3xl font-bold text-gray-900 dark:text-gray-600 md:text-xl lg:text-xl">{{ $courseCompletionRatios[$course->id] }}%
+                <h1 class="mb-4 text-3xl font-bold text-gray-900 dark:text-gray-600 md:text-xl lg:text-xl">
+                    {{ $courseCompletionRatios[$course->id] }}%
                 </h1>
             </div>
+
+            <!-- Search Bar -->
+            <form class="d-flex justify-content-center" method="GET" action="{{ route('normalUsers.courseDetailPage', $course->id) }}"
+                accept-charset="UTF-8" role="search">
+                <div class="grid grid-cols-12 gap-1 relative mb-3" data-te-input-wrapper-init>
+                    <div class="col-span-12 md:col-span-4">
+                    </div>
+                    <div class="col-span-12 md:col-span-3">
+                        <input
+                            class="peer block min-h-[auto] mb-3 w-full rounded border-0 bg-light px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-800 dark:placeholder:text-zinc-350 dark:peer-focus:text-primary [&:not([data-te-input-placeholder-active])]:placeholder:opacity-100 form-control"
+                            maxlength="50" type="text" name="search" placeholder="Search Topic"
+                            value="{{ request('search') }}">
+                    </div>
+                    <div class="col-span-12 md:col-span-5">
+                        <button
+                            class="inline-block rounded border-2 border-primary px-6 pb-[6px] pt-2 text-xs font-medium uppercase leading-normal text-primary transition duration-150 ease-in-out hover:border-primary-600 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-primary-600 focus:border-primary-600 focus:text-primary-600 focus:outline-none focus:ring-0 active:border-primary-700 active:text-primary-700 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10"
+                            href="#"><i class="fa-solid fa-magnifying-glass"></i></i><span
+                                style="margin-left: 5px;">Search</span>
+                        </button>
+                    </div>
+                </div>
+            </form>
+            
             <div class="card-body">
                 <!-- Table -->
                 <div>
@@ -36,6 +58,7 @@
                         <thead class="">
                             <tr>
                                 <th class="columns-7xl">Topic Title</th>
+                                <th class="columns-xl">Status</th>
                                 <th class="columns-xl action-column">Action</th>
                             </tr>
                         </thead>
@@ -44,6 +67,13 @@
                                 @foreach ($topics as $topic)
                                     <tr>
                                         <td class="text-center">{{ $topic->title }}</td>
+                                        <td class="text-center">
+                                            @if ($isCompleted[$topic->id] == 1)
+                                                Completed
+                                            @else
+                                                Incompleted
+                                            @endif
+                                        </td>                                        
                                         <td class="text-center">
                                             <a class="button_secondary inline-block rounded border-2 border-primary px-3 pb-[6px] pt-2 me-2 text-xs font-medium uppercase leading-normal text-primary transition duration-150 ease-in-out hover:border-primary-600 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-primary-600 focus:border-primary-600 focus:text-primary-600 focus:outline-none focus:ring-0 active:border-primary-700 active:text-primary-700 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10"
                                                 href="{{ route('normalUsers.topicDetailPage', ['topic' => $topic->id]) }}">View
@@ -63,7 +93,9 @@
                 </div>
 
                 <!-- Pagination -->
-                @include('admin/components.pagination')
+                <div class="mx-auto w-4/5">
+                    {{ $topics->links('pagination::tailwind') }}
+                </div>
             </div>
 
     </main>

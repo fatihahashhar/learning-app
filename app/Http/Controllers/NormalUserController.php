@@ -13,13 +13,29 @@ class NormalUserController extends Controller
     /**
      * Display Index Page
      */
-    public function index()
+    public function index(Request $request)
     {
-        $courses = auth()->user()->courses;
+        $user = auth()->user();
+
+        $keyword = $request->get('search');
+
+        $allCourses = Course::whereHas('users', function ($query) use ($user) {
+            $query->where('user_id', $user->id);
+        })->paginate(10);
+
         $courseCompletionRatios = [];
 
-        foreach ($courses as $course) {
+        foreach ($allCourses as $course) {
+
             $courseCompletionRatios[$course->id] = $this->completionRatio($course);
+
+            if (!empty($keyword)) {
+                $courses = Course::where('title', 'LIKE', "%$keyword%")
+                    ->orWhere('description', 'LIKE', "%$keyword%")
+                    ->paginate(10);
+            } else {
+                $courses = $allCourses;
+            }
         }
 
         return view('user/index', compact('courses', 'courseCompletionRatios'));
@@ -29,17 +45,37 @@ class NormalUserController extends Controller
     /**
      * Display Course Detail Page.
      */
-    public function courseDetailPage(Course $course)
+
+    public function courseDetailPage(Course $course, Request $request)
     {
-        $topics = Topic::orderBy('created_at', 'asc')
-            ->where('course_id', $course->id)->get();
+        $user = auth()->user();
+
+        $keyword = $request->get('search');
 
         $courseCompletionRatios = [];
-
         $courseCompletionRatios[$course->id] = $this->completionRatio($course);
 
-        return view('user/course_detail_user', compact('course', 'topics', 'courseCompletionRatios'));
+        // Retrieve the topic IDs based on the keyword or the course
+        $query = Topic::where('course_id', $course->id);
+
+        if (!empty($keyword)) {
+            $query->where('title', 'LIKE', "%$keyword%");
+        }
+
+        $topics = $query->paginate(10);
+
+        // Get the IDs of the topics
+        $topicIds = $topics->pluck('id');
+
+        // Get the completion status for each topic for the user
+        $isCompleted = $user->topics()
+            ->whereIn('topic_id', $topicIds)
+            ->get()
+            ->pluck('pivot.is_completed', 'pivot.topic_id');
+
+        return view('user/course_detail_user', compact('course', 'topics', 'courseCompletionRatios', 'isCompleted'));
     }
+
 
     /**
      * Display Topic Detail Page.

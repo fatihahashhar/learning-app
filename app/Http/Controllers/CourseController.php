@@ -10,9 +10,20 @@ class CourseController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $courses = Course::all();
+        $user = auth()->user();
+
+        $keyword = $request->get('search');
+
+        if (!empty($keyword)) {
+            $courses = Course::where('title', 'LIKE', "%$keyword%")
+                ->orWhere('description', 'LIKE', "%$keyword%")
+                ->paginate(10);
+        } else {
+            $courses = Course::paginate(10);
+        }
+
         return view('admin/course/index', compact('courses'));
     }
 

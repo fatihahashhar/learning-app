@@ -2,8 +2,7 @@
 
 @section('content')
     <main>
-        <br>
-        <div class="card rounded-md mx-auto max-w-7xl py-6 sm:px-6 lg:px-8" style="background-color: #a4b6c4">
+        <div class="card rounded-md mx-auto max-w-7xl py-6 sm:px-6 lg:px-8 my-5" style="background-color: #a4b6c4">
             <div class="card-header">
                 <h3 class="font-bold text-center text-lg mb-4">Update Topic</h3>
             </div>

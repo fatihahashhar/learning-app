@@ -36,8 +36,8 @@
                         <thead class="">
                             <tr>
                                 <th class="columns-2xl">Username</th>
-                                <th class="columns-7xl">Email</th>
-                                <th class="columns-3xl">Action</th>
+                                <th class="columns-6xl">Email</th>
+                                <th class="columns-4xl">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -75,7 +75,9 @@
                 </div>
 
                 <!-- Pagination -->
-                @include('admin/components.pagination')
+                <div class="mx-auto w-4/5">
+                        {{ $users->links('pagination::tailwind') }}
+                </div>
             </div>
 
     </main>

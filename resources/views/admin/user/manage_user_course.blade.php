@@ -16,8 +16,7 @@
     @endif
 
     <main>
-        <br>
-        <div class="card rounded-md mx-auto max-w-7xl py-6 sm:px-6 lg:px-8" style="background-color: #a4b6c4">
+        <div class="card my-6 rounded-md mx-auto max-w-7xl py-6 sm:px-6 lg:px-8" style="background-color: #a4b6c4">
 
             <div class="card-body">
 
@@ -36,19 +35,22 @@
                                     <tr>
                                         <td class="text-center">{{ $course->title }}</td>
                                         <td class="text-center">
-                                            <form action="{{ route('users.assignCourses', [$user, $course]) }}" method="POST">
+                                            <form action="{{ route('users.assignCourses', [$user, $course]) }}"
+                                                method="POST">
                                                 @csrf
                                                 @method('PUT')
-                                            
+
                                                 @if ($user->courses->contains($course->id))
                                                     <input type="hidden" name="remove" value="{{ $course->id }}">
-                                                    <button type="submit" name="remove" value="{{ $course->id }}" class="button_red inline-block rounded border-2 border-primary px-3 pb-[6px] pt-2 me-2 text-xs font-medium uppercase leading-normal text-primary transition duration-150 ease-in-out hover:border-primary-600 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-primary-600 focus:border-primary-600 focus:text-primary-600 focus:outline-none focus:ring-0 active:border-primary-700 active:text-primary-700 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10">Remove</button>
+                                                    <button type="submit" name="remove" value="{{ $course->id }}"
+                                                        class="button_red inline-block rounded border-2 border-primary px-3 pb-[6px] pt-2 me-2 text-xs font-medium uppercase leading-normal text-primary transition duration-150 ease-in-out hover:border-primary-600 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-primary-600 focus:border-primary-600 focus:text-primary-600 focus:outline-none focus:ring-0 active:border-primary-700 active:text-primary-700 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10">Remove</button>
                                                 @else
                                                     <input type="hidden" name="assign" value="{{ $course->id }}">
-                                                    <button type="submit" name="assign" value="{{ $course->id }}" class="button_green inline-block rounded border-2 border-primary px-3 pb-[6px] pt-2 me-2 text-xs font-medium uppercase leading-normal text-primary transition duration-150 ease-in-out hover:border-primary-600 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-primary-600 focus:border-primary-600 focus:text-primary-600 focus:outline-none focus:ring-0 active:border-primary-700 active:text-primary-700 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10">Assign</button>
+                                                    <button type="submit" name="assign" value="{{ $course->id }}"
+                                                        class="button_green inline-block rounded border-2 border-primary px-3 pb-[6px] pt-2 me-2 text-xs font-medium uppercase leading-normal text-primary transition duration-150 ease-in-out hover:border-primary-600 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-primary-600 focus:border-primary-600 focus:text-primary-600 focus:outline-none focus:ring-0 active:border-primary-700 active:text-primary-700 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10">Assign</button>
                                                 @endif
                                             </form>
-                                            
+
                                         </td>
                                     </tr>
                                 @endforeach
@@ -64,7 +66,9 @@
                 </div>
 
                 <!-- Pagination -->
-                @include('admin/components.pagination')
+                <div class="mx-auto w-4/5">
+                    {{ $courses->links('pagination::tailwind') }}
+                </div>
             </div>
 
     </main>

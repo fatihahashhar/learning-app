@@ -6,6 +6,7 @@ use App\Models\Course;
 use App\Models\Topic;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -13,11 +14,18 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
+    // public function index()
+    // {
+    //     $users = User::all();
+    //     return view('admin/user/index', compact('users'));
+    // }
+
     public function index()
     {
-        $users = User::all();
+        $users = User::where('role', 'user')->paginate(10);
         return view('admin/user/index', compact('users'));
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -32,9 +40,31 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        // Check if the email or username already exists in the database
+        $existingUsername = User::where('username', $request->username)
+            ->first();
+
+        $existingEmail = User::where('email', $request->email)
+            ->first();
+
+        if ($existingUsername) {
+            // Username already exists, return with an error message
+            return redirect()->back()
+                ->withInput($request->except('email', 'password', 'password_confirmation'))
+                ->withErrors(['username' => 'The username has already been taken.']);
+        }
+
+        else if ($existingEmail) {
+            // Email already exists, return with an error message
+            return redirect()->back()
+                ->withInput($request->except('username', 'password', 'password_confirmation'))
+                ->withErrors(['email' => 'The email has existed in database.']);
+        }
+
+        // Validation passed, create the new user
         $request->validate([
             'username' => 'required|string|max:250',
-            'email' => 'required|string|email:rfc,dns|max:250|unique:users',
+            'email' => 'required|string|email:rfc,dns|max:250',
             'password' => 'required|string|min:8|confirmed'
         ]);
 
@@ -48,6 +78,7 @@ class UserController extends Controller
         // Redirect
         return redirect()->route('users.index')->with('success', 'User created successfully!');
     }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -99,7 +130,7 @@ class UserController extends Controller
 
     public function manageUserCoursePage(Course $course, User $user)
     {
-        $courses = Course::all();
+        $courses = Course::paginate(10);
         return view('admin/user/manage_user_course', compact('courses', 'user'));
     }
 

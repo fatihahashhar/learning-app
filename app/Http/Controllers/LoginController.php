@@ -38,7 +38,7 @@ class LoginController extends Controller
                 return redirect()->route('courses.index', $user->id)->with('success', 'Login successful');
             } else {
                 // User is not an admin, route to 'normalUsers.dashboard'
-                return redirect()->route('normalUsers.dashboard', ['user' => $user->id])
+                return redirect()->route('normalUsers.dashboard')
                     ->with('success', 'Login successful');
             }
         }

@@ -15,10 +15,21 @@ class TopicController extends Controller
     public $title;
     public $contents;
 
-    public function index(Course $course, Topic $topic)
+    public function index(Course $course, Request $request)
     {
-        $topics = Topic::orderBy('created_at', 'asc')
-            ->where('course_id', $course->id)->get();
+        $user = auth()->user();
+
+        $keyword = $request->get('search');
+
+        if (!empty($keyword)) {
+            $topics = Topic::where('title', 'LIKE', "%$keyword%")
+                ->where('course_id', $course->id)
+                ->orderBy('created_at', 'asc')
+                ->paginate(10);
+        } else {
+            $topics = Topic::where('course_id', $course->id)
+            ->paginate(10);
+        }
 
         return view('admin/topic/index', compact('course', 'topics'));
     }
@@ -36,7 +47,7 @@ class TopicController extends Controller
      */
 
     public function store(Request $request, Course $course)
-    {        
+    {
         Topic::create([
             'title' => $request->title,
             'contents' => $request->contents,
@@ -82,7 +93,7 @@ class TopicController extends Controller
             }
         } else {
             return redirect()->route('topics.read', ['course' => $course->id, 'topic' => $topic->id])->with('info', 'No changes were made');
-        }   
+        }
     }
 
     /**

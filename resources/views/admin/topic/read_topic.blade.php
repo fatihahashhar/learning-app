@@ -35,7 +35,7 @@
             </div>
             <br>
             <div class="card-body">
-                <h3 class="text-justify mb-2" style="line-height: 12px; white-space: pre-wrap;">{!! nl2br(e($topic->contents)) !!}</h3>
+                <h3 class="text-justify mb-2" style="line-height: 16px; white-space: pre-wrap;">{!! nl2br(e($topic->contents)) !!}</h3>
             </div>
     </main>
 
