@@ -1,25 +1,83 @@
 @extends('layouts.app')
 
+@section('title', "Manage User's Course")
+
 @section('content')
+    <!-- Pop-up -->
     @if ($message = Session::get('success'))
-        <div id="success-notification" class="bg-green-500 text-center text-white text-sm p-3 rounded-lg mb-4">
-            <p>{{ $message }}</p>
-        </div>
-    @elseif ($message = Session::get('error'))
-        <div id="error-notification" class="bg-red-500 text-center text-white text-sm p-3 rounded-lg mb-4">
-            <p>{{ $message }}</p>
-        </div>
+        {{ session()->forget('success') }}
+        <script type="text/javascript">
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            })
+
+            Toast.fire({
+                icon: 'success',
+                title: '{{ $message }}'
+            })
+        </script>
     @elseif ($message = Session::get('info'))
-        <div id="info-notification" class="bg-blue-500 text-center text-white text-sm p-3 rounded-lg mb-4">
-            <p>{{ $message }}</p>
-        </div>
+        {{ session()->forget('info') }}
+        <script type="text/javascript">
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            })
+
+            Toast.fire({
+                icon: 'info',
+                title: '{{ $message }}'
+            })
+        </script>
+    @elseif ($message = Session::get('error'))
+        {{ session()->forget('error') }}
+        <script type="text/javascript">
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            })
+
+            Toast.fire({
+                icon: 'error',
+                title: '{{ $message }}'
+            })
+        </script>
     @endif
+    <!-- Pop-up -->
 
     <main>
         <div class="card my-6 rounded-md mx-auto max-w-7xl py-6 sm:px-6 lg:px-8" style="background-color: #a4b6c4">
+            <div class="card-header">
+                <button
+                    class="mb-4 button_back inline-block rounded border-2 border-primary px-6 pb-[6px] pt-2 text-xs font-medium uppercase leading-normal text-primary transition duration-150 ease-in-out hover:border-primary-600 hover-bg-neutral-500 hover:bg-opacity-10 hover-text-primary-600 focus-border-primary-600 focus-text-primary-600 focus-outline-none focus-ring-0 active-border-primary-700 active-text-primary-700 dark-hover-bg-neutral-100 dark-hover-bg-opacity-10"
+                    onclick="javascript:history.back();">
+                    <i class="fa-solid fa-arrow-left-long"></i><span style="margin-left: 5px;">Back</span>
+                </button>
+            </div>
 
             <div class="card-body">
-
                 <!-- Table -->
                 <div>
                     <table class="table-auto my-5">
@@ -35,8 +93,7 @@
                                     <tr>
                                         <td class="text-center">{{ $course->title }}</td>
                                         <td class="text-center">
-                                            <form action="{{ route('users.assignCourses', [$user, $course]) }}"
-                                                method="POST">
+                                            <form action="{{ route('users.assignCourses', $user->id) }}" method="POST">
                                                 @csrf
                                                 @method('PUT')
 

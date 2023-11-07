@@ -21,6 +21,10 @@ class TopicController extends Controller
 
         $keyword = $request->get('search');
 
+        if ($request->has('action') && $request->input('action') === 'clear') {
+            return redirect()->route('topics.index', [$course->id]);
+        }
+
         if (!empty($keyword)) {
             $topics = Topic::where('title', 'LIKE', "%$keyword%")
                 ->where('course_id', $course->id)
@@ -28,7 +32,7 @@ class TopicController extends Controller
                 ->paginate(10);
         } else {
             $topics = Topic::where('course_id', $course->id)
-            ->paginate(10);
+                ->paginate(10);
         }
 
         return view('admin/topic/index', compact('course', 'topics'));

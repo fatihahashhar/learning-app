@@ -19,28 +19,31 @@ class NormalUserController extends Controller
 
         $keyword = $request->get('search');
 
-        $allCourses = Course::whereHas('users', function ($query) use ($user) {
+        if ($request->has('action') && $request->input('action') === 'clear') {
+            return redirect()->route('normalUsers.dashboard');
+        }
+
+        $coursesQuery = Course::whereHas('users', function ($query) use ($user) {
             $query->where('user_id', $user->id);
-        })->paginate(10);
+        });
+
+        if (!empty($keyword)) {
+            $coursesQuery->where(function ($query) use ($keyword) {
+                $query->where('title', 'LIKE', "%$keyword%")
+                    ->orWhere('description', 'LIKE', "%$keyword%");
+            });
+        }
+
+        $courses = $coursesQuery->paginate(10);
 
         $courseCompletionRatios = [];
 
-        foreach ($allCourses as $course) {
-
+        foreach ($courses as $course) {
             $courseCompletionRatios[$course->id] = $this->completionRatio($course);
-
-            if (!empty($keyword)) {
-                $courses = Course::where('title', 'LIKE', "%$keyword%")
-                    ->orWhere('description', 'LIKE', "%$keyword%")
-                    ->paginate(10);
-            } else {
-                $courses = $allCourses;
-            }
         }
 
         return view('user/index', compact('courses', 'courseCompletionRatios'));
     }
-
 
     /**
      * Display Course Detail Page.
@@ -51,6 +54,10 @@ class NormalUserController extends Controller
         $user = auth()->user();
 
         $keyword = $request->get('search');
+
+        if ($request->has('action') && $request->input('action') === 'clear') {
+            return redirect()->route('normalUsers.courseDetailPage', $course->id);
+        }
 
         $courseCompletionRatios = [];
         $courseCompletionRatios[$course->id] = $this->completionRatio($course);
@@ -76,7 +83,6 @@ class NormalUserController extends Controller
         return view('user/course_detail_user', compact('course', 'topics', 'courseCompletionRatios', 'isCompleted'));
     }
 
-
     /**
      * Display Topic Detail Page.
      */
@@ -98,11 +104,12 @@ class NormalUserController extends Controller
         if ($value === 'complete') {
             // Update the 'is_completed' column to 1
             $user->topics()->updateExistingPivot($topicId, ['is_completed' => 1]);
+            return redirect()->back()->with('success', 'You have completed this topic.');
         } else {
             // Update the 'is_completed' column to 0
             $user->topics()->updateExistingPivot($topicId, ['is_completed' => 0]);
+            return redirect()->back()->with('error', 'You have marked this topic as incomplete.');
         }
-        return redirect()->back()->with('success', 'Completion status updated.');
     }
 
     public function completionRatio(Course $course)

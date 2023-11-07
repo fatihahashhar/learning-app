@@ -27,6 +27,22 @@
         border: 2px solid;
     }
 
+    .button_back {
+        background-color: rgba(114, 116, 118, 0.617);
+        color: white !important;
+        padding-left: 5px;
+        padding-right: 5px;
+        border: 2px solid;
+    }
+
+    .button_search {
+        background-color: transparent;
+        color: rgb(126, 125, 125) !important;
+        padding-left: 5px;
+        padding-right: 5px;
+        border: none;
+    }
+
     .button_red {
         background-color: rgb(255, 38, 0);
         color: white !important;

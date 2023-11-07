@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Update Topic')
+
 @section('content')
     <main>
         <div class="card rounded-md mx-auto max-w-7xl py-6 sm:px-6 lg:px-8 my-5" style="background-color: #a4b6c4">

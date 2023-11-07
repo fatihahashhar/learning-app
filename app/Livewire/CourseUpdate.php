@@ -41,13 +41,15 @@ class CourseUpdate extends Component
         // Update the course properties
         $course->title = $this->title;
         $course->description = $this->description;
-        $course->save();
 
-        // Reset the form fields
-        $this->title = '';
-        $this->description = '';
-
-        // success message
-        return redirect()->route('courses.index')->with('success', 'Course updated successfully!');
+        if ($course->isDirty()) {
+            if ($course->save()) {
+                return redirect()->route('courses.index')->with('success', 'Course updated successfully!');
+            } else {
+                return redirect()->route('courses.index')->with('error', 'Topic cannot be updated!');
+            }
+        } else {
+            return redirect()->route('courses.index')->with('info', 'No changes were made');
+        }
     }
 }

@@ -20,9 +20,25 @@ class UserController extends Controller
     //     return view('admin/user/index', compact('users'));
     // }
 
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::where('role', 'user')->paginate(10);
+        $user = auth()->user();
+
+        $keyword = $request->get('search');
+
+        if ($request->has('action') && $request->input('action') === 'clear') {
+            return redirect()->route('users.index');
+        }
+
+        if (!empty($keyword)) {
+            $users = User::where('username', 'LIKE', "%$keyword%")
+                ->orWhere('email', 'LIKE', "%$keyword%")
+                ->orderBy('created_at', 'asc')
+                ->paginate(10);
+        } else {
+            $users = User::where('role', 'user')->paginate(10);
+        }
+
         return view('admin/user/index', compact('users'));
     }
 
@@ -52,9 +68,7 @@ class UserController extends Controller
             return redirect()->back()
                 ->withInput($request->except('email', 'password', 'password_confirmation'))
                 ->withErrors(['username' => 'The username has already been taken.']);
-        }
-
-        else if ($existingEmail) {
+        } else if ($existingEmail) {
             // Email already exists, return with an error message
             return redirect()->back()
                 ->withInput($request->except('username', 'password', 'password_confirmation'))
@@ -128,7 +142,7 @@ class UserController extends Controller
         return redirect()->route('users.index')->with('success', 'User has been deleted!');
     }
 
-    public function manageUserCoursePage(Course $course, User $user)
+    public function manageUserCoursePage(User $user)
     {
         $courses = Course::paginate(10);
         return view('admin/user/manage_user_course', compact('courses', 'user'));
