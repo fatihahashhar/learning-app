@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('title', 'Create New User')
+@section('metaDescription', 'Easily create a new user account for the system.')
 
 @section('content')
     <main>

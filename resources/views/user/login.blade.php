@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('title', 'Login')
+@section('metaDescription', 'Login page to login into the platform to explore courses, manage user profile, and engage with educational content.')
 
 @section('content')
     <!-- Pop-up -->

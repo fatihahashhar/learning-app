@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('title','Create New Topic')
+@section('metaDescription', 'Easily create and customize a new topic for a particular course.')
 
 @section('content')
     <main>

@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('title', $topic->title)
+@section('metaDescription', 'Display the contents of a particular topic.')
 
 @section('content')
     <!-- Pop-up -->

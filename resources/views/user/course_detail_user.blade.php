@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('title', $course->title)
+@section('metaDescription', 'List out all of the Topics for a particular course.')
 
 @section('content')
     <!-- Pop-up -->

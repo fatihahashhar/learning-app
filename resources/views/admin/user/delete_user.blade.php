@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('title', 'Delete User')
+@section('metaDescription', 'Safely remove a particular user from the system.')
 
 @section('content')
     <main>

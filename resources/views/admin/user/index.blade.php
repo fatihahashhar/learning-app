@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('title', 'Users')
+@section('metaDescription', 'List out all of the registered User account that are available.')
 
 @section('content')
     <!-- Pop-up -->

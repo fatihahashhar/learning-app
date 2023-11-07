@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('title', 'Courses')
+@section('metaDescription', 'List out all of the Courses that has been assigned.')
 
 @section('content')
     <!-- Pop-up -->

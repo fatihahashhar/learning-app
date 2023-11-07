@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('title', "Manage User's Course")
+@section('metaDescription', 'Efficiently administer user enrollments or course assignments.')
 
 @section('content')
     <!-- Pop-up -->
