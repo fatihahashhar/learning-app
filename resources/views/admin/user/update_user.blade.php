@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title', 'Update User')
-@section('metaDescription', 'Seamlessly modify and refine existing user of the system.')
+@section('metaDescription', 'Seamlessly modify the existing user of the system.')
 
 @section('content')
     <main>
