@@ -92,25 +92,25 @@ class NormalUserController extends Controller
         return view('user/topic_detail_user', compact('topic', 'user'));
     }
 
-    public function completedTopic(User $user)
-    {
-        // Get the value (either 'complete' or 'incomplete') from the request
-        $value = request()->has('complete') ? 'complete' : 'incomplete';
+    // public function completedTopic(User $user)
+    // {
+    //     // Get the value (either 'complete' or 'incomplete') from the request
+    //     $value = request()->has('complete') ? 'complete' : 'incomplete';
 
-        // Get the topic ID from the request
-        $topicId = request('complete') ?? request('incomplete');
+    //     // Get the topic ID from the request
+    //     $topicId = request('complete') ?? request('incomplete');
 
-        // Validate that the value is either 'complete' or 'incomplete'
-        if ($value === 'complete') {
-            // Update the 'is_completed' column to 1
-            $user->topics()->updateExistingPivot($topicId, ['is_completed' => 1]);
-            return redirect()->back()->with('success', 'You have completed this topic.');
-        } else {
-            // Update the 'is_completed' column to 0
-            $user->topics()->updateExistingPivot($topicId, ['is_completed' => 0]);
-            return redirect()->back()->with('error', 'You have marked this topic as incomplete.');
-        }
-    }
+    //     // Validate that the value is either 'complete' or 'incomplete'
+    //     if ($value === 'complete') {
+    //         // Update the 'is_completed' column to 1
+    //         $user->topics()->updateExistingPivot($topicId, ['is_completed' => 1]);
+    //         return redirect()->back()->with('success', 'You have completed this topic.');
+    //     } else {
+    //         // Update the 'is_completed' column to 0
+    //         $user->topics()->updateExistingPivot($topicId, ['is_completed' => 0]);
+    //         return redirect()->back()->with('error', 'You have marked this topic as incomplete.');
+    //     }
+    // }
 
     public function completionRatio(Course $course)
     {

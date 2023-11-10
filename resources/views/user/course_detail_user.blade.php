@@ -77,9 +77,12 @@
                 <h1 class="mb-7 text-3xl font-bold text-gray-900 dark:text-gray-600 md:text-2xl lg:text-2xl">
                     {{ $course->description }}</h1>
                 </h1>
-                <h1 class="mb-4 text-3xl font-bold text-gray-900 dark:text-gray-600 md:text-xl lg:text-xl">
+                <progress-bar :completion-ratio="{{ $courseCompletionRatios[$course->id] }}"></progress-bar>
+                
+                <p class="mb-4 text-base font-bold text-gray-900 dark:text-gray-600 md:text-sm lg:text-sm">
                     {{ $courseCompletionRatios[$course->id] }}%
-                </h1>
+                </p>
+
             </div>
 
             <!-- Search Bar -->

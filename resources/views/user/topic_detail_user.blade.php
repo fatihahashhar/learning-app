@@ -81,7 +81,7 @@
 
                     </div>
                     <div class="col-span-12 md:col-span-2 flex justify-end">
-                        <form action="{{ route('normalUsers.completedTopic', $user->id) }}" method="POST">
+                        {{-- <form action="{{ route('normalUsers.completedTopic', $user->id) }}" method="POST">
                             @csrf
                             @method('PUT')
 
@@ -96,10 +96,18 @@
                                     class="button_green inline-block rounded border-2 border-primary px-3 pb-[6px] pt-2 me-2 text-xs font-medium uppercase leading-normal text-primary transition duration-150 ease-in-out hover:border-primary-600 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-primary-600 focus:border-primary-600 focus:text-primary-600 focus:outline-none focus:ring-0 active:border-primary-700 active:text-primary-700 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10">Mark
                                     as Completed</button>
                             @endif
-                        </form>
-
+                        </form> --}}
+                        <div class="flex justify-end p-2">
+                            <completion-button :user-key={{ Auth::user()->id }}
+                                :is-completed="{{ Auth::user()->topics()->wherePivot('topic_id', $topic->id)->value('is_completed') }}"
+                                :topic-key="{{ $topic->id }}">{{ $topic->id }}</completion-button>
+                        </div>
                     </div>
+
                 </div>
+                {{-- <div>
+                    <example-component></example-component>
+                </div> --}}
 
                 <h3 class="font-bold text-center text-lg mb-4">{{ $topic->title }}</h3>
             </div>
