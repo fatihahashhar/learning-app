@@ -31,15 +31,3 @@
          </form>
      </div>
  </dialog>
-
-
- <script>
-     document.addEventListener("DOMContentLoaded", function() {
-         const cancelButton = document.getElementById("cancelButton");
-         const modal = document.getElementById("delete_topic_modal");
-
-         cancelButton.addEventListener("click", function() {
-             modal.close();
-         });
-     });
- </script>

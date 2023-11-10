@@ -1,7 +1,8 @@
 @extends('layouts.app')
 
 @section('title', 'Login')
-@section('metaDescription', 'Login page to login into the platform to explore courses, manage user profile, and engage with educational content.')
+@section('metaDescription', 'Login page to login into the platform to explore courses, manage user profile, and engage
+    with educational content.')
 
 @section('content')
     <!-- Pop-up -->
@@ -113,20 +114,6 @@
     </main>
 
     <script>
-        /* When the user clicks on the button, toggle between hiding and showing the dropdown content */
-        function myFunction() {
-            document.getElementById("myDropdown").classList.toggle("show");
-        }
-
-        // Close the dropdown if the user clicks outside of it
-        window.onclick = function(e) {
-            if (!e.target.matches('.dropbtn')) {
-                var myDropdown = document.getElementById("myDropdown");
-                if (myDropdown.classList.contains('show')) {
-                    myDropdown.classList.remove('show');
-                }
-            }
-        }
         // Wait for the document to be fully loaded
         document.addEventListener("DOMContentLoaded", function() {
             const successNotification = document.getElementById('success-notification');

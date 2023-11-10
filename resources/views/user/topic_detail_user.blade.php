@@ -103,7 +103,7 @@
                                 :topic-key="{{ $topic->id }}">{{ $topic->id }}</completion-button>
                         </div>
                     </div>
-
+                    
                 </div>
                 {{-- <div>
                     <example-component></example-component>
@@ -145,3 +145,4 @@
         });
     </script>
 @endsection
+@vite(['resources/js/app.js'])

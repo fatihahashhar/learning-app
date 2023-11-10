@@ -3,7 +3,8 @@
 </template>
 
 <script>
-import { isSet } from '@vue/shared';
+// import { isSet } from '@vue/shared';
+import axios from 'axios';
 
 export default {
     props: {
@@ -48,7 +49,7 @@ export default {
                     console.log('is_completed value', this.localIsCompleted);
                 })
                 .catch(error => {
-                    return 'cannot update';
+                    console.error('Error updating topic status:', error);
                 });
         },
     },

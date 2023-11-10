@@ -102,7 +102,7 @@
                 <h3 class="text-justify mb-2" style="line-height: 16px; white-space: pre-wrap;">{!! nl2br(e($topic->contents)) !!}</h3>
             </div>
         </div>
-
+        @livewireScripts
     </main>
 
     <script>
