@@ -89,7 +89,9 @@ class NormalUserController extends Controller
     public function topicDetailPage(Topic $topic)
     {
         $user = auth()->user();
-        return view('user/topic_detail_user', compact('topic', 'user'));
+        $courseId = $topic->course_id;
+        $course = Course::find($courseId);
+        return view('user/topic_detail_user', compact('topic', 'user', 'course'));
     }
 
     // public function completedTopic(User $user)

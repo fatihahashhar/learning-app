@@ -71,11 +71,11 @@
     <main>
         <div class="card my-6 rounded-md mx-auto max-w-7xl py-6 sm:px-6 lg:px-8" style="background-color: #a4b6c4">
             <div class="card-header">
-                <button
+                <a
                     class="mb-4 button_back inline-block rounded border-2 border-primary px-6 pb-[6px] pt-2 text-xs font-medium uppercase leading-normal text-primary transition duration-150 ease-in-out hover:border-primary-600 hover-bg-neutral-500 hover:bg-opacity-10 hover-text-primary-600 focus-border-primary-600 focus-text-primary-600 focus-outline-none focus-ring-0 active-border-primary-700 active-text-primary-700 dark-hover-bg-neutral-100 dark-hover-bg-opacity-10"
-                    onclick="javascript:history.back();">
+                    href="{{ route('users.index') }}">
                     <i class="fa-solid fa-arrow-left-long"></i><span style="margin-left: 5px;">Back</span>
-                </button>
+                </a>
             </div>
 
             <div class="card-body">

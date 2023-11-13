@@ -6,8 +6,8 @@ const app = createApp({});
 // REGISTER GLOBAL VUE APPLICATION (COMPONENT)
 
 // example vue component
-import ExampleComponent from "./components/ExampleComponent.vue";
-app.component("example-component", ExampleComponent);
+// import ExampleComponent from "./components/ExampleComponent.vue";
+// app.component("example-component", ExampleComponent);
 
 // Progress bar
 import Progressbar from "./components/Progressbar.vue";

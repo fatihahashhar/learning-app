@@ -78,11 +78,9 @@
                     {{ $course->description }}</h1>
                 </h1>
                 <progress-bar :completion-ratio="{{ $courseCompletionRatios[$course->id] }}"></progress-bar>
-                
                 <p class="mb-4 text-base font-bold text-gray-900 dark:text-gray-600 md:text-sm lg:text-sm">
                     {{ $courseCompletionRatios[$course->id] }}%
                 </p>
-
             </div>
 
             <!-- Search Bar -->
@@ -180,7 +178,7 @@
             const successNotification = document.getElementById('success-notification');
 
             if (successNotification) {
-                // Add a CSS class to hide the notification after 3 seconds
+                // CSS class to hide the notification after 3 seconds
                 setTimeout(function() {
                     successNotification.classList.add('hidden');
                 }, 3000); // 3000 milliseconds = 3 seconds
@@ -189,4 +187,3 @@
     </script>
 @endsection
 @vite(['resources/js/app.js'])
-
