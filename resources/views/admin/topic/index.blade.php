@@ -187,7 +187,7 @@
                         </svg>
                         <span class="sr-only">Info</span>
                         <div class="text-center">
-                            <span class="font-medium">No Topic Found!</span> Change a few things up and try to search again.
+                            <span class="font-medium">No Topic Found!</span>
                         </div>
                     </div>
                     @endif

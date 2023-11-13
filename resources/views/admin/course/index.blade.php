@@ -149,7 +149,7 @@
                         </svg>
                         <span class="sr-only">Info</span>
                         <div class="text-center">
-                            <span class="font-medium">No Course Found!</span> Change a few things up and try to search
+                            <span class="font-medium">No Course Found!</span>
                             again.
                         </div>
                     </div>

@@ -20,10 +20,7 @@
 
              <div class="justify-center modal-action sm:flex sm:items-start">
 
-                 <button id="cancelButton"
-                     class="button_red button_red:hover px-4 me-3"
-                     href="#">Cancel
-                 </button>
+                <button type="button" id="cancelButton" class="button_red button_red:hover px-4 me-3">Cancel</button>
 
                  <button type="submit"
                      class="button_blue button_blue:hover px-4">Create
@@ -35,12 +32,13 @@
 
 
  <script>
-     document.addEventListener("DOMContentLoaded", function() {
-         const cancelButton = document.getElementById("cancelButton");
-         const modal = document.getElementById("create_course_modal");
+    document.addEventListener("DOMContentLoaded", function() {
+        const cancelButton = document.getElementById("cancelButton");
+        const modal = document.getElementById("create_course_modal");
 
-         cancelButton.addEventListener("click", function() {
-             modal.close();
-         });
-     });
- </script>
+        cancelButton.addEventListener("click", function() {
+            modal.close();
+        });
+    });
+</script>
+

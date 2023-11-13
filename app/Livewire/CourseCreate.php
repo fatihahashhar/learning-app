@@ -24,7 +24,6 @@ class CourseCreate extends Component
 
     public function createCourse()
     {
-        // Add code to create the course here
         Course::create([
             'title' => $this->title,
             'description' => $this->description,
