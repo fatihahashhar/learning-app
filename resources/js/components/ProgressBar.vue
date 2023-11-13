@@ -27,7 +27,7 @@
   
   .progress-bar {
     position: relative;
-    background-color: rgb(90, 130, 153);
+    background-color: #537188;
     border-radius: 999px;
     height: 100%;
   }

@@ -21,12 +21,12 @@
              <div class="justify-center modal-action sm:flex sm:items-start">
 
                  <button id="cancelButton"
-                     class="button_secondary inline-block rounded border-2 border-primary px-2 me-2 pb-[6px] pt-2 text-xs font-medium uppercase leading-normal text-primary transition duration-150 ease-in-out hover:border-primary-600 hover:bg-red-500 hover:bg-opacity-100 hover:text-white focus:border-primary-600 focus:text-primary-600 focus:outline-none focus:ring-0 active:border-primary-700 active:text-primary-700 dark:hover:bg-red-600 dark:hover:bg-opacity-100"
+                     class="button_red button_red:hover px-4 me-3"
                      href="#">Cancel
                  </button>
 
                  <button type="submit"
-                     class="button_secondary inline-block rounded border-2 border-primary px-2 pb-[6px] pt-2 text-xs font-medium uppercase leading-normal text-primary transition duration-150 ease-in-out hover:border-primary-600 hover:bg-blue-500 hover:bg-opacity-100 hover:text-white focus:border-primary-600 focus:text-primary-600 focus:outline-none focus:ring-0 active:border-primary-700 active:text-primary-700 dark:hover:bg-blue-600 dark:hover:bg-opacity-100">Create
+                     class="button_blue button_blue:hover px-4">Create
                  </button>
              </div>
          </form>
