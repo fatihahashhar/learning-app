@@ -150,7 +150,6 @@
                         <span class="sr-only">Info</span>
                         <div class="text-center">
                             <span class="font-medium">No Course Found!</span>
-                            again.
                         </div>
                     </div>
                     @endif

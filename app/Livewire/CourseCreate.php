@@ -16,11 +16,11 @@ class CourseCreate extends Component
         return view('admin/livewire.course-create');
     }
 
-    public function hideModal()
-    {
-        // This method is called when the "Cancel" button is clicked
-        $this->emit('hideModal');
-    }
+    // public function hideModal()
+    // {
+    //     // This method is called when the "Cancel" button is clicked
+    //     $this->emit('hideModal');
+    // }
 
     public function createCourse()
     {
@@ -28,10 +28,6 @@ class CourseCreate extends Component
             'title' => $this->title,
             'description' => $this->description,
         ]);
-
-        // Reset the form fields
-        $this->title = '';
-        $this->description = '';
 
         return redirect()->route('courses.index')->with('success', 'Course created successfully!');
     }

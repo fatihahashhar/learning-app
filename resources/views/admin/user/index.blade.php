@@ -153,7 +153,6 @@
                             <span class="sr-only">Info</span>
                             <div class="text-center">
                                 <span class="font-medium">No User Found!</span>
-                                again.
                             </div>
                         </div>
                     @endif

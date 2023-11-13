@@ -17,13 +17,11 @@ class IsAdmin
     public function handle($request, Closure $next)
     {
         $user = Auth::user(); // Get the currently authenticated user
-
         if ($user && $user->role === 'admin') {
             return $next($request);
         }
 
-        // If the user is not an admin or not logged in, you can redirect them to an error page or do something else as needed.
-        // For example, you can redirect them to a forbidden page:
+        // If the user is not an admin or not logged in, redirect user to login page:
             return redirect()->route('login')->with('info', 'Login is required');
     }
 }
