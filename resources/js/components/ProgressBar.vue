@@ -1,32 +1,45 @@
 <template>
-    <div class="progress-bar">
-        <div class="progress" :style="{ width: completionRatio + '%' }"></div>
+    <div class="progress-container mb-8">
+      <div class="progress-bar" :style="{ width: completionRatio + '%' }">
+        <span class="progress-label">{{ completionRatio }}%</span>
+      </div>
     </div>
-</template>
-
-<script>
-export default {
+  </template>
+  
+  <script>
+  export default {
     props: {
-        completionRatio: {
-            type: Number,
-            required: true,
-        },
+      completionRatio: {
+        type: Number,
+        required: true,
+      },
     },
-};
-</script>
-
-<style scoped>
-.progress-bar {
+  };
+  </script>
+  
+  <style scoped>
+  .progress-container {
     width: 100%;
-    height: 20px;
-    background-color: #ccc;
-    border: 1px solid #5b5a5a;
+    background-color: #cbd5e0;
+    border-radius: 999px;
+    height: 15px;
+  }
+  
+  .progress-bar {
     position: relative;
-}
-
-.progress {
-    height: 100%;
     background-color: rgb(90, 130, 153);
-    transition: width 0.3s;
-}
-</style>
+    border-radius: 999px;
+    height: 100%;
+  }
+  
+  .progress-label {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-weight: 600;
+    font-size: small;
+  }
+  </style>
+  

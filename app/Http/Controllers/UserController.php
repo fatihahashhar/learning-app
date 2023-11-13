@@ -31,8 +31,11 @@ class UserController extends Controller
         }
 
         if (!empty($keyword)) {
-            $users = User::where('username', 'LIKE', "%$keyword%")
-                ->orWhere('email', 'LIKE', "%$keyword%")
+            $users = User::where(function ($query) use ($keyword) {
+                $query->where('username', 'LIKE', "%$keyword%")
+                    ->orWhere('email', 'LIKE', "%$keyword%");
+            })
+                ->where('role', 'user')
                 ->orderBy('created_at', 'asc')
                 ->paginate(10);
         } else {

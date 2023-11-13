@@ -110,16 +110,16 @@
                 </form>
                 <!-- Table -->
                 <div>
-                    <table class="table-auto my-5">
-                        <thead class="">
-                            <tr>
-                                <th class="columns-2xl">Username</th>
-                                <th class="columns-6xl">Email</th>
-                                <th class="columns-4xl">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @if (count($users) > 0)
+                    @if (count($users) > 0 && $users->where('role', 'user')->count() > 0)
+                        <table class="table-auto mt-5 mb-3">
+                            <thead class="">
+                                <tr>
+                                    <th class="columns-2xl">Username</th>
+                                    <th class="columns-6xl">Email</th>
+                                    <th class="columns-4xl">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
                                 @foreach ($users as $user)
                                     @if ($user->role === 'user')
                                         <tr>
@@ -127,30 +127,38 @@
                                             <td class="text-center">{{ $user->email }}</td>
                                             <td class="text-center">
                                                 <a class="button_secondary inline-block rounded border-2 border-primary px-3 pb-[6px] pt-2 me-2 text-xs font-medium uppercase leading-normal text-primary transition duration-150 ease-in-out hover:border-primary-600 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-primary-600 focus:border-primary-600 focus:text-primary-600 focus:outline-none focus:ring-0 active:border-primary-700 active:text-primary-700 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10"
-                                                    href="{{ route('users.manageUserCoursePage', ['user' => $user->id]) }} ">Manage
+                                                    href="{{ route('users.manageUserCoursePage', ['user' => $user->id]) }}">Manage
                                                     Courses
                                                 </a>
                                                 <a class="button_secondary inline-block rounded border-2 border-primary px-3 pb-[6px] pt-2 me-2 text-xs font-medium uppercase leading-normal text-primary transition duration-150 ease-in-out hover:border-primary-600 hover.bg-neutral-500 hover:bg-opacity-10 hover:text-primary-600 focus:border-primary-600 focus:text-primary-600 focus:outline-none focus:ring-0 active:border-primary-700 active:text-primary-700 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10"
                                                     href="{{ route('users.updatePage', $user->id) }}">Edit
                                                 </a>
-                                                <a class="button_secondary inline-block rounded border-2 border-primary px-3 pb-[6px] pt-2 me-2 text-xs font-medium uppercase leading-normal text-primary transition duration-150 ease-in-out hover:border-primary-600 hover.bg-neutral-500 hover:bg-opacity-10 hover:text-primary-600 focus:border-primary-600 focus:text-primary-600 focus:outline-none focus:ring-0 active:border-primary-700 active:text-primary-700 dark:hover.bg-neutral-100 dark:hover:bg-opacity-10"
+                                                <a class="button_secondary inline-block rounded border-2 border-primary px-3 pb-[6px] pt-2 me-2 text-xs font-medium uppercase leading-normal text-primary transition duration-150 ease-in-out hover:border-primary-600 hover.bg-neutral-500 hover:bg-opacity-10 hover:text-primary-600 focus:border-primary-600 focus:text-primary-600 focus:outline-none focus:ring-0 active:border-primary-700 active:text-primary-700 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10"
                                                     href="{{ route('users.deletePage', $user->id) }}">Delete
                                                 </a>
                                             </td>
                                         </tr>
                                     @endif
                                 @endforeach
-                            @else
-                                <tr>
-                                    <td colspan="3" align="center">
-                                        No User Found!
-                                    </td>
-                                </tr>
-                            @endif
-
-                        </tbody>
-                    </table>
+                            </tbody>
+                        </table>
+                    @else
+                        <div class="flex items-center justify-center p-4 mt-4 mb-[-1rem] text-sm text-red-800 dark:text-red-700"
+                            role="alert">
+                            <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                <path
+                                    d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+                            </svg>
+                            <span class="sr-only">Info</span>
+                            <div class="text-center">
+                                <span class="font-medium">No User Found!</span> Change a few things up and try to search
+                                again.
+                            </div>
+                        </div>
+                    @endif
                 </div>
+
 
                 <!-- Pagination -->
                 <div class="mx-auto w-4/5">

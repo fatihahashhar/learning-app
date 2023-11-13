@@ -44,11 +44,43 @@
     }
 
     .button_red {
-        background-color: rgb(255, 38, 0);
+        display: inline-block;
+        padding: 8px 10px;
         color: white !important;
-        padding-left: 5px;
-        padding-right: 5px;
-        border: 2px solid;
+        margin-right: 2px;
+        font-size: 12px;
+        font-weight: 600;
+        text-transform: uppercase;
+        text-align: center;
+        border: 2px solid #ffffff;
+        background-color: #D71313;
+        border-radius: 4px;
+        transition: all 0.3s ease-in-out;
+    }
+    
+    .button_red:hover {
+        background-color: #77150c;
+        border-color: #77150c;
+    }
+
+    .button_blue {
+        display: inline-block;
+        padding: 8px 10px;
+        color: white !important;
+        margin-right: 2px;
+        font-size: 12px;
+        font-weight: 600;
+        text-transform: uppercase;
+        text-align: center;
+        border: 2px solid #ffffff;
+        background-color: #0802A3;
+        border-radius: 4px;
+        transition: all 0.3s ease-in-out;
+    }
+    
+    .button_blue:hover {
+        background-color: #190482;
+        border-color: #190482;
     }
 
     .button_green {

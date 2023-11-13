@@ -26,7 +26,7 @@ Route::post('/users/authenticate', [LoginController::class, 'authenticate'])->na
 Route::middleware(['is.admin'])->group(function () {
     // Routes that require the 'admin' role
     Route::get('courses', [CourseController::class, 'index'])->name('courses.index');
-    Route::any('topics/{course}', [TopicController::class, 'index'])->name('topics.index');
+    Route::get('topics/{course}', [TopicController::class, 'index'])->name('topics.index');
     Route::any('/courses/topics/createPage/{course}', [TopicController::class, 'createPage'])->name('topics.createPage');
     Route::any('/courses/topics/store/{course}', [TopicController::class, 'store'])->name('topics.store');
     Route::any('/courses/topics/read/{course}/{topic}', [TopicController::class, 'read'])->name('topics.read');
