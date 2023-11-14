@@ -6,6 +6,7 @@
 import axios from 'axios';
 
 export default {
+    // receives these props and uses them to set up initial data
     props: {
         isCompleted: Number,
         topicKey: Number,
@@ -34,14 +35,15 @@ export default {
     methods: {
         toggleCompletion() {
 
+            // request data object is created
             const requestData = {
                 userKey: this.userKey,
                 topicKey: this.topicKey,
             };
 
-            console.log('userKey', this.userKey, 'topicKey', this.topicKey, requestData);
-
+            // Send PUT request to /api/updateTopicStatus/{topic} endpoint using Axios
             axios.put(`/api/updateTopicStatus/${this.topicKey}`, requestData)
+                // If the request is successful
                 .then(response => {
                     console.log(response);
 
@@ -63,9 +65,12 @@ export default {
                         title: 'Topic completion status updated successfully',
                     });
 
+                    // Update local completion status.
                     this.localIsCompleted = response.data.isCompleted;
                     console.log('is_completed value', this.localIsCompleted);
                 })
+
+                // If the request fails
                 .catch(error => {
                     console.error(error);
 
@@ -127,4 +132,5 @@ export default {
 .button_red:hover {
     background-color: #77150c;
     border-color: #77150c;
-}</style>
+}
+</style>
