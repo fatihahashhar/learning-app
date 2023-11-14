@@ -25,6 +25,7 @@ class TopicDelete extends Component
     public function deleteTopic()
     {
         $topic = Topic::find($this->topic->id);
+        // $course = $topic->course_id;
 
         if (!$topic) {
             return 'Topic not found';
