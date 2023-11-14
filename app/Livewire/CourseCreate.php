@@ -29,10 +29,6 @@ class CourseCreate extends Component
             'description' => $this->description,
         ]);
 
-        // Reset the form fields when the modal is closed
-        $this->title = '';
-        $this->description = '';
-
         return redirect()->route('courses.index')->with('success', 'Course created successfully!');
     }
 }
