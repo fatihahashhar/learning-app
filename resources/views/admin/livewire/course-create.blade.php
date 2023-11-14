@@ -35,10 +35,16 @@
     document.addEventListener("DOMContentLoaded", function() {
         const cancelButton = document.getElementById("cancelButton");
         const modal = document.getElementById("create_course_modal");
+        const form = document.querySelector("#create_course_modal form");
 
         cancelButton.addEventListener("click", function() {
+            // Reset the form fields
+            form.reset();
+
+            // Close the modal
             modal.close();
         });
     });
 </script>
+
 

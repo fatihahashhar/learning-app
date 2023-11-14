@@ -40,7 +40,7 @@ Route::middleware(['is.admin'])->group(function () {
     Route::get('/users/deletePage/{user}', [UserController::class, 'deletePage'])->name('users.deletePage');
     Route::post('/users/delete/{user}', [UserController::class, 'delete'])->name('users.delete');
     Route::get('/users/manageUserCoursePage/{user}', [UserController::class, 'manageUserCoursePage'])->name('users.manageUserCoursePage');
-    Route::post('/users/assignCourses/{user}', [UserController::class, 'assignCourses'])->name('users.assignCourses');
+    Route::put('/users/assignCourses/{user}', [UserController::class, 'assignCourses'])->name('users.assignCourses');
 });
 
 Route::middleware(['is.normal.user'])->group(function () {
