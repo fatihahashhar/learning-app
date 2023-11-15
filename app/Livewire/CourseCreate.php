@@ -16,12 +16,6 @@ class CourseCreate extends Component
         return view('admin/livewire.course-create');
     }
 
-    // public function hideModal()
-    // {
-    //     // This method is called when the "Cancel" button is clicked
-    //     $this->emit('hideModal');
-    // }
-
     public function createCourse()
     {
         Course::create([

@@ -44,12 +44,12 @@ class CourseUpdate extends Component
 
         if ($course->isDirty()) {
             if ($course->save()) {
-                return redirect()->route('courses.index')->with('success', 'Course updated successfully!');
+                return redirect()->route('topics.index', $course->id)->with('success', 'Course updated successfully!');
             } else {
-                return redirect()->route('courses.index')->with('error', 'Topic cannot be updated!');
+                return redirect()->route('topics.index', $course->id)->with('error', 'Topic cannot be updated!');
             }
         } else {
-            return redirect()->route('courses.index')->with('info', 'No changes were made');
+            return redirect()->route('topics.index', $course->id)->with('info', 'No changes were made');
         }
     }
 }

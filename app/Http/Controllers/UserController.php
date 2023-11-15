@@ -59,31 +59,28 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        // Check if the email or username already exists in the database
-        $existingUsername = User::where('username', $request->username)
-            ->first();
-
-        $existingEmail = User::where('email', $request->email)
-            ->first();
-
-        if ($existingUsername) {
-            // Username already exists, return with an error message
-            return redirect()->back()
-                ->withInput($request->except('email', 'password', 'password_confirmation'))
-                ->withErrors(['username' => 'The username has already been taken.']);
-        } else if ($existingEmail) {
-            // Email already exists, return with an error message
-            return redirect()->back()
-                ->withInput($request->except('username', 'password', 'password_confirmation'))
-                ->withErrors(['email' => 'The email has existed in database.']);
-        }
-
         // Validation passed, create the new user
         $request->validate([
             'username' => 'required|string|max:250',
             'email' => 'required|string|email:rfc,dns|max:250',
             'password' => 'required|string|min:8|confirmed'
         ]);
+
+        // Check if the email or username already exists in the database
+        $existingUsername = User::where('username', $request->username)->first();
+        $existingEmail = User::where('email', $request->email)->first();
+
+        if ($existingUsername) {
+            // Username already exists, return with an error message
+            return redirect()->back()
+                ->withInput($request->all())
+                ->withErrors(['username' => 'The username has already been taken.']);
+        } else if ($existingEmail) {
+            // Email already exists, return with an error message
+            return redirect()->back()
+                ->withInput($request->all())
+                ->withErrors(['email' => 'The email has existed in the database.']);
+        }
 
         User::create([
             'username' => $request->username,
@@ -95,7 +92,6 @@ class UserController extends Controller
         // Redirect
         return redirect()->route('users.index')->with('success', 'User created successfully!');
     }
-
 
     /**
      * Show the form for editing the specified resource.
@@ -111,9 +107,34 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //dd('updating page');
-        $user = User::find($user->id);
+        // Validation passed, create the new user
+        $request->validate([
+            'username' => 'required|string|max:250',
+            'email' => 'required|string|email:rfc,dns|max:250',
+        ]);
 
+        // Check if the email or username already exists in the database
+        $existingUsername = User::where('username', $request->username)
+            ->where('id', '!=', $user->id) // Exclude the current user from the check
+            ->first();
+
+        $existingEmail = User::where('email', $request->email)
+            ->where('id', '!=', $user->id) // Exclude the current user from the check
+            ->first();
+
+        if ($existingUsername) {
+            // Username already exists, return with an error message
+            return redirect()->back()
+                ->withInput($request->all())
+                ->withErrors(['username' => 'The username has already been taken.']);
+        } else if ($existingEmail) {
+            // Email already exists, return with an error message
+            return redirect()->back()
+                ->withInput($request->all())
+                ->withErrors(['email' => 'The email has existed in the database.']);
+        }
+
+        // Update the user object after validation
         $user->username = $request->username;
         $user->email = $request->email;
 
@@ -127,6 +148,7 @@ class UserController extends Controller
             return redirect()->route('users.index')->with('info', 'No changes were made');
         }
     }
+
 
     public function deletePage(User $user)
     {

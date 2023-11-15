@@ -52,6 +52,22 @@ class TopicController extends Controller
 
     public function store(Request $request, Course $course)
     {
+        // Validation passed, create the new user
+        $request->validate([
+            'title' => 'required|string|max:255|unique:courses,title',
+            'contents' => 'required|min:5',
+        ]);
+
+        // Check if the title already exists in the database
+        $existingTitle = Topic::where('title', $request->title)->first();
+
+        if ($existingTitle) {
+            // Topic title already exists, return with an error message
+            return redirect()->back()
+                ->withInput($request->all())
+                ->withErrors(['title' => 'The title has already been taken.']);
+        }
+
         Topic::create([
             'title' => $request->title,
             'contents' => $request->contents,

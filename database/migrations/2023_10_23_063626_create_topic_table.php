@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('topics', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('course_id');
-            $table->string('title');
+            $table->string('title')->unique();
             $table->text('contents');
             $table->timestamps();
             $table->foreign('course_id')

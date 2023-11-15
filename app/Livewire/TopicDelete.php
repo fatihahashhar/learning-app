@@ -25,7 +25,7 @@ class TopicDelete extends Component
     public function deleteTopic()
     {
         $topic = Topic::find($this->topic->id);
-        // $course = $topic->course_id;
+        $course = $topic->course_id;
 
         if (!$topic) {
             return 'Topic not found';
@@ -34,6 +34,6 @@ class TopicDelete extends Component
         $topic->delete();
         
         // success message
-        return redirect()->route('courses.index')->with('success', 'Topic deleted successfully!');
+        return redirect()->route('topics.index', $course)->with('success', 'Topic deleted successfully!');
     }
 }
