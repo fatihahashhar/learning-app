@@ -15,11 +15,9 @@
                                 </path>
                             </svg>
                         </button>
-                        <a href="{{ route('courses.index') }}" class="flex ml-2 md:mr-24">
-                            <img src="https://www.lookp.com/assets/logo/yyc/yyc-profile.png" class="h-12 ml-12"
-                                alt="YYC Logo" />
+                        <a href="{{ route('courses.index') }}" class="flex ml-4 md:mr-24">
                             <span
-                                class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white"></span>
+                                class="self-center text-xl font-semibold sm:text-xl whitespace-nowrap dark:text-white"> Learning App </span>
                         </a>
                     </div>
                     <div class="flex items-center">
@@ -90,11 +88,9 @@
                                         </path>
                                     </svg>
                                 </button>
-                                <a href="{{ route('normalUsers.dashboard', auth()->user()->id) }}" class="flex ml-2 md:mr-24">
-                                    <img src="https://www.lookp.com/assets/logo/yyc/yyc-profile.png" class="h-12 ml-12"
-                                        alt="YYC Logo" />
+                                <a href="{{ route('normalUsers.dashboard', auth()->user()->id) }}" class="flex ml-4 md:mr-24">
                                     <span
-                                        class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white"></span>
+                                        class="self-center text-xl font-semibold sm:text-xl whitespace-nowrap dark:text-white"> Learning App </span>
                                 </a>
                             </div>
                             <div class="flex items-center">
