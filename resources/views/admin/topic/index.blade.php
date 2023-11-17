@@ -94,13 +94,13 @@
 
                         <!-- Button to open Update Course Modal -->
                         <button type="button" onclick="update_course_modal.showModal()"
-                            class="button_secondary inline-block rounded border-2 border-primary px-3 pb-[6px] pt-2 text-xs me-2 font-medium uppercase leading-normal text-primary transition duration-150 ease-in-out hover:border-primary-600 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-primary-600 focus:border-primary-600 focus:text-primary-600 focus:outline-none focus:ring-0 active:border-primary-700 active:text-primary-700 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10">
+                            class="button_secondary button_secondary:hover px-4 me-3">
                             <i class="fas fa-edit"></i><span style="margin-left: 5px;">Update</span>
                         </button>
 
                         <!-- Button to open Delete Course Modal -->
                         <button type="button" onclick="delete_course_modal.showModal()"
-                            class="button_secondary inline-block rounded border-2 border-primary px-3 pb-[6px] pt-2 text-xs font-medium uppercase leading-normal text-primary transition duration-150 ease-in-out hover:border-primary-600 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-primary-600 focus:border-primary-600 focus:text-primary-600 focus:outline-none focus:ring-0 active:border-primary-700 active:text-primary-700 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10">
+                            class="button_secondary button_secondary:hover px-4">
                             <i class="fas fa-trash"></i><span style="margin-left: 5px;">Delete</span>
                         </button>
                     </div>
@@ -132,7 +132,7 @@
                                 </div>
                                 <div class="col-span-12 md:col-span-5">
                                     <button
-                                        class="button_back inline-block rounded border-2 border-primary px-4 pb-[6px] pt-2 text-xs font-medium uppercase leading-normal text-primary transition duration-150 ease-in-out hover:border-primary-600 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-primary-600 focus:border-primary-600 focus:text-primary-600 focus:outline-none focus:ring-0 active:border-primary-700 active:text-primary-700 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10"
+                                        class="button_back button_back:hover px-4"
                                         name="action" value="clear">
                                         <i class="fa-solid fa-broom"></i><span style="margin-left: 5px;">Clear</span>
                                     </button>
@@ -145,7 +145,7 @@
                     <!-- Column -->
                     <div class="col-span-12 md:col-span-4 flex justify-end" style="align-items: flex-end;">
                         <!-- Button to open Create Topic Modal -->
-                        <a class="button_primary inline-block rounded border-2 border-primary px-6 pb-[6px] pt-2 text-xs font-medium uppercase leading-normal text-primary transition duration-150 ease-in-out hover:border-primary-600 hover-bg-neutral-500 hover-bg-opacity-10 hover-text-primary-600 focus-border-primary-600 focus-text-primary-600 focus-outline-none focus-ring-0 active-border-primary-700 active-text-primary-700 dark-hover-bg-neutral-100 dark-hover-bg-opacity-10"
+                        <a class="button_primary button_primary:hover px-6"
                             href={{ route('topics.createPage', $course->id) }}>
                             <i class="fa-solid fa-plus"></i><span style="margin-left: 5px;">Create Topic</span>
                         </a>
@@ -169,7 +169,7 @@
                                     <tr>
                                         <td class="text-center">{{ $topic->title }}</td>
                                         <td class="text-center">
-                                            <a class="button_secondary inline-block rounded border-2 border-primary px-3 pb-[6px] pt-2 me-2 text-xs font-medium uppercase leading-normal text-primary transition duration-150 ease-in-out hover:border-primary-600 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-primary-600 focus:border-primary-600 focus:text-primary-600 focus:outline-none focus:ring-0 active:border-primary-700 active:text-primary-700 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10"
+                                            <a class="button_secondary button_secondary:hover px-4"
                                                 href="{{ route('topics.read', ['course' => $course->id, 'topic' => $topic->id]) }}">View
                                             </a>
                                         </td>

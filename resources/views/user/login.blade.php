@@ -104,7 +104,7 @@
                         </div>
                         <div align="right">
                             <input type="submit"
-                                class="button_primary inline-block rounded border-2 border-primary px-11 py-2 mt-3 text-xs font-medium uppercase leading-normal text-primary transition duration-150 ease-in-out hover:border-primary-600 hover:bg-blue-500 hover:bg-opacity-100 hover:text-white focus:border-primary-600 focus:text-primary-600 focus:outline-none focus:ring-0 active:border-primary-700 active:text-primary-700 dark:hover:bg-blue-600 dark:hover:bg-opacity-100"
+                                class="button_primary button_primary:hover px-10"
                                 value="Login">
                         </div>
                     </form>
