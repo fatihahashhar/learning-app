@@ -17,11 +17,11 @@ The **Learning App** is a web-based platform designed for managing online course
 - **VS Code**
 
 ### Dependencies:
-- **PHP 8.x**
-- **Composer**
-- **Node.js and npm**
-- **MySQL**
-- **Laravel 10.x**
+- **PHP 8.1 or higher**: Required for running the Laravel application.
+- **Composer**: Used for managing PHP dependencies.
+- **Node.js and npm**: Required for managing frontend dependencies and compiling assets.
+- **MySQL**: The database system used for storing application data.
+- **Laravel 10.x**: The PHP framework for building the web application.
 
 ---
 
@@ -52,15 +52,55 @@ The **Learning App** is a web-based platform designed for managing online course
 
 ---
 
-## Installation
-
-### Prerequisites
-1. **PHP**: Ensure PHP 8.x is installed.
-2. **Composer**: Install Composer for dependency management.
-3. **Node.js & npm**: For managing frontend assets.
-4. **MySQL**: Ensure MySQL is installed and running.
+## Installation Steps
 
 ### Steps
 1. **Clone the repository:**
    ```bash
    git clone https://github.com/fatihahashhar/learning-app.git
+
+2. **Navigate to the project directory:**
+   ```bash
+   cd learning-app
+
+3. Install dependencies:
+   ```bash
+   composer install
+   npm install
+
+4. Set up environment variables:
+- Copy the .env.example file and rename it to .env
+   ```bash
+   cp .env.example .env
+- Update the .env file with your database credentials and other settings.
+
+5. Generate the application key:
+   ```bash
+   php artisan key:generate
+
+6. Run migrations:
+   ```bash
+   php artisan migrate
+
+7. Compile frontend assets:
+   ```bash
+   npm run dev
+
+8. Serve the application:
+   ```bash
+   php artisan serve
+
+---
+
+## Usage
+
+### Admin
+- Log in as Admin: Use the credentials set up in the database.
+- Manage Courses: Create, update, or delete courses.
+- Manage Users: Assign courses to users and monitor their progress.
+
+### Students
+- Log in as a Student: View assigned courses and start learning.
+- Complete Courses: Track your progress and finish courses at your own pace.
+
+---
