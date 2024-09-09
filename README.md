@@ -41,14 +41,26 @@ The **Learning App** is a web-based platform designed for managing online course
 
 ## Screenshots
 
-### Admin Dashboard
-![Admin Dashboard](images/admin-dashboard.png)
+### Admin Dashboard - Courses
+![Admin Dashboard - Courses](public/images/admin-courses-image.png)
 
-### Manage Courses
-![Manage Courses](images/manage-courses.png)
+### Admin - Users
+![Admin - Users](public/images/admin-users-image.png)
 
-### Student Dashboard
-![Student Dashboard](images/student-dashboard.png)
+### Admin - Topics
+![Admin - Topics](public/images/admin-topics-image.png)
+
+### Admin - Topics (Read)
+![Admin - Topics (Read)](public/images/admin-topics-read-image.png)
+
+### Student Dashboard (Courses)
+![Student Dashboard (Courses)](public/images/student-courses-image.png)
+
+### Student - Course Details 
+![Student - Course Details](public/images/student-course-detail-image.png)
+
+### Student - Topics Details
+![Student - Topics Details](public/images/student-topic-detail-image.png)
 
 ---
 
